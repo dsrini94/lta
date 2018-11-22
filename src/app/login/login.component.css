@@ -1,0 +1,94 @@
+.container{
+  display: grid;
+  height:100%;
+  width:100%;
+  grid-template-rows: 30vh 65vh 5vh;
+  margin:0;
+  padding:0;
+}
+
+.container .section1 {
+  background-color: #163f7f;
+}
+
+.container .section2 {
+  background-color: #e3e6ed;
+
+}
+
+.container .section3 {
+  background-color: #163f7f;
+  padding: auto;
+}
+
+.container .section3 p {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  margin-top: 7px;
+}
+
+.loginCotainer{
+  position: absolute;
+  top:45%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  height: 75vh;
+  background-color: #fff;
+}
+
+.logo{
+  display: block;
+  margin: auto;
+  width:40%;
+  height:40%;
+}
+
+.formContainer {
+  margin: 5px;
+}
+
+.formContainer input[type="text"],.formContainer input[type="password"]{
+    border: 0 ;
+    background: none !important;
+    display: block;
+    margin: auto;
+    text-align: center;
+    border: 2px solid #163f7f;
+    padding:14px 10px;
+    width:200px;
+    outline: none;
+    color:#163f7f;
+    transition: 0.25s;
+}
+
+.formContainer button{
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding:14px 10px;
+  width:200px;
+  background-color: #163f7f;
+  color:white;
+  border:0;
+  cursor:pointer;
+  transition: 0.25s;
+
+}
+
+.formContainer button:hover{
+  background-color: #2f6838;
+}
+
+.formContainer input[type="text"]:focus,.formContainer input[type="password"]:focus {
+  width: 280px;
+  border-color: #2f6838;
+}
+
+.warningMsg p{
+  text-align: center;
+  color:red;
+  margin:0;
+  padding:0;
+  font-size: 18px;
+}

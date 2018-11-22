@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="section1">
+  </div>
+
+  <div class="section2">
+  </div>
+
+  <div class="section3">
+    <p>© 2018 Wipro. All Rights Reserved</p>
+  </div>
+</div>
+
+<div class="loginCotainer">
+  <div class="logoContainer">
+    <img src="../../assets/logo.jpeg" class="logo"/>
+  </div>
+
+  <div class="warningMsg">
+    <p>{{msg}}</p>
+  </div>
+
+  <div class="formContainer">
+    <br/>
+    <br/>
+    <input type="text" placeholder="Location" required [(ngModel)]="location"/>
+    <br/>
+    <input type="text" placeholder="Login ID" required [(ngModel)]="userId"/>
+    <br/>
+    <input type="password" placeholder="Password" [(ngModel)]="password"/>
+    <br/>
+    <button (click)="login()">Login</button>
+    <br/>
+  </div>
+
+
+</div>

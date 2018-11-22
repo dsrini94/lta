@@ -1,0 +1,56 @@
+.appbar {
+  padding:5px;
+  background-color: #163f7f;
+}
+
+.appbar .greetings {
+  color: #fff;
+  text-align: right;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.appbar img {
+  position: absolute;
+  left: 25px;
+  top:8px;
+  height:50px;
+  width:50px;
+
+}
+
+.branding {
+  margin-left: 80px;
+  color:white;
+  font-size: 18px;
+  z-index: 10;
+  float: left;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.menubar {
+  display: grid !important;
+  padding:7px;
+  grid-template-columns: 130px 100px 125px 130px;
+  background-color: #d5dae8;
+}
+
+.menu {
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+  cursor: pointer;
+}
+
+.menu img {
+  float: left;
+  margin-top: 6px;
+}
+
+.menu p {
+  float: left;
+  margin:5px 5px 5px 10px;
+  font-size: 18px;
+  font-family: 'Noto Sans SC', sans-serif;
+}
