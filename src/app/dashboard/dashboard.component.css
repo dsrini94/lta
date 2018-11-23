@@ -1,16 +1,16 @@
-.appbar {
-  padding:5px;
+.appbarComponent {
+  padding:15px;
   background-color: #163f7f;
 }
 
-.appbar .greetings {
+.appbarComponent .greetings {
   color: #fff;
   text-align: right;
   font-size: 18px;
   margin-right: 10px;
 }
 
-.appbar img {
+.appbarComponent img {
   position: absolute;
   left: 25px;
   top:8px;
@@ -43,14 +43,37 @@
   cursor: pointer;
 }
 
-.menu img {
-  float: left;
-  margin-top: 6px;
+.menuButton mat-icon {
+  font-size: 25px;
+  font-weight: lighter;
 }
 
-.menu p {
-  float: left;
-  margin:5px 5px 5px 10px;
-  font-size: 18px;
+.menuButton span {
+  font-size: 20px;
+  margin-left: 8px;
+  font-weight: lighter;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.emptyFillComponent {
+  border-style: dashed;
+  margin: 70px;
+  border-width: medium;
+  border-color: #163f7f;
+}
+
+.emptyFillComponent img{
+  height:300px;
+  width: 300px;
+  display: block;
+  margin: auto;
+}
+
+.emptyFillComponent p{
+  text-align: center;
+  color:#163f7f;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 25px;
   font-family: 'Noto Sans SC', sans-serif;
 }

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     console.log(this.userId,this.password,this.location);
 
     if(this.userId!=null || this.password!=null)
-      this.router.navigate(['/dashboard/'this.userId]);
+      this.router.navigate(['/dashboard/',this.userId]);
     else
       this.msg = "Please Fill all the Fields.";
   }

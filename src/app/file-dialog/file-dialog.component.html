@@ -1,0 +1,10 @@
+<h4>Enter {{data.type | uppercase}} Name</h4>
+
+<mat-form-field class="example-full-width">
+    <input matInput placeholder="{{data.type | uppercase}} Name" [(ngModel)]="name">
+</mat-form-field>
+
+<div class="buttonContainer">
+  <button mat-raised-button color="warn" (click)="onButtonClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onButtonClick()">Save</button>
+</div>
