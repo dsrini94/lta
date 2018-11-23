@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -8,6 +9,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDialogComponent } from './file-dialog/file-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+
+import { DashboardService } from './dashboard.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule, MatDialogModule, MatFormFieldModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule} from '@angular/material';
@@ -34,13 +37,16 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     AngularFileUploaderModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   entryComponents: [
     FileDialogComponent,
     UploadDialogComponent
   ],
-  providers: [],
+  providers: [
+    DashboardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

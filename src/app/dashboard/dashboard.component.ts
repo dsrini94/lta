@@ -5,6 +5,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { FileDialogComponent } from '../file-dialog/file-dialog.component';
 import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component';
+import { DashboardService } from '../dashboard.service';
+
 
 
 export interface DialogData {
@@ -22,8 +24,9 @@ export class DashboardComponent implements OnInit {
   userId: string = null;
   empty: boolean = true;
   type: string = null;
+  name: string = null;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
 
   ngOnInit() {
     this.getUserId();
@@ -43,8 +46,14 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if(result != null){
+        this.dashboardservice.createFile(this.userId,result,this.type)
+                             .subscribe((response:any) => {
+                               console.log(response);
+                             });
+      }
     });
+
   }
 
   openUploadDialog(): void {
@@ -52,8 +61,7 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+
   }
 
 
