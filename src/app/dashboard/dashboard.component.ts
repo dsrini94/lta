@@ -10,10 +10,11 @@ import { DashboardService } from '../dashboard.service';
 
 
 export interface UserObj {
-  userId: string;
-  type: string;
-  name: string;
-}
+  userId: string,
+  type: string,
+  name: string,
+};
+
 
 @Component({
   selector: 'app-dashboard',
@@ -23,10 +24,28 @@ export interface UserObj {
 export class DashboardComponent implements OnInit {
 
   userId: string = null;
-  empty: boolean = true;
+  empty: boolean = false;
   type: string = null;
   name: string = null;
-  userObj: UserObj = {};
+  userObj: UserObj = null;
+  selectedObj: UserObj;
+  contentObj: UserObj[] = [
+    {
+      userId:'srini',
+      type:'image',
+      name:'upload.jpg',
+    },
+    {
+      userId:'srini',
+      type:'file',
+      name:'upload.txt',
+    },{
+      userId:'srini',
+      type:'folder',
+      name:'upload',
+    }
+  ]
+
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
 
@@ -40,6 +59,11 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog(type): void {
+
+    console.log(this.selectedObj);
+
+    this.type = type;
+
     const dialogRef = this.dialog.open(FileDialogComponent, {
       width:'350px',
       data:{
@@ -50,13 +74,13 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
 
-        this.userObj:{
+        this.userObj = {
           userId: this.userId,
           name: result,
           type: this.type
-        }
+        };
 
-        this.dashboardservice.createFile(userObj)
+        this.dashboardservice.createFile(this.userObj)
                              .subscribe((response:any) => {
                                console.log(response);
                              });
@@ -71,5 +95,20 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
-}
+  }
+
+
+  handleDeleteFile():void {
+
+    this.dashboardservice.deleteFile(this.selectedObj)
+                         .subscribe((response:any) => {
+                           console.log(response);
+                         });
+  }
+
+
+  handleSelect(selectedObj: UserObj):void {
+    this.selectedObj = selectedObj
+  }
+
 }

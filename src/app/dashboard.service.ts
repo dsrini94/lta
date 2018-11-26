@@ -13,4 +13,8 @@ export class DashboardService {
     return this.http.post('http://localhost:3000/file/createFile',userObj);
   }
 
+  deleteFile(selectedObj) {
+    return this.http.post('http://localhost:3000/file/deleteFile',selectedObj);
+  }
+
 }

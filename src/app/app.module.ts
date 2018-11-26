@@ -13,7 +13,17 @@ import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { DashboardService } from './dashboard.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatMenuModule, MatDialogModule, MatFormFieldModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+        MatMenuModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatRadioModule,
+        MatTableModule } from '@angular/material';
 
 import { AngularFileUploaderModule } from "angular-file-uploader";
 
@@ -38,7 +48,10 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule,
+    MatRadioModule,
+    MatTableModule
   ],
   entryComponents: [
     FileDialogComponent,

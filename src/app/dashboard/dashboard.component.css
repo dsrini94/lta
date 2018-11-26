@@ -1,5 +1,5 @@
 .appbarComponent {
-  padding:15px;
+  padding:5px;
   background-color: #163f7f;
 }
 
@@ -11,16 +11,17 @@
 }
 
 .appbarComponent img {
-  position: absolute;
   left: 25px;
   top:8px;
   height:50px;
   width:50px;
-
+  padding:0px;
+  margin:4px 0px 0px 40px;
+  float:left;
 }
 
 .branding {
-  margin-left: 80px;
+  margin-left: 20px;
   color:white;
   font-size: 18px;
   z-index: 10;
@@ -76,4 +77,73 @@
   letter-spacing: 3px;
   font-size: 25px;
   font-family: 'Noto Sans SC', sans-serif;
+}
+
+.contents {
+  margin:0px 20px 20px 20px;
+  padding:20px;
+}
+
+
+.contentList h2 {
+  display: block;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  color:#163f7f;
+  margin: 0px;
+}
+
+.contentList {
+  padding:20px;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 10vw 10vw 20vw 20vw 20vw 20vw;
+  background-color: #d5dae8;
+  padding:13px;
+  margin:10px 0px;
+}
+
+.tableHeader mat-icon{
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.tableHeader h4 {
+  font-family: 'Noto Sans SC', sans-serif;
+  margin:0px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.tableRows mat-icon {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.tableRows mat-radio-button {
+  margin-left: 25px;
+}
+
+.tableRows {
+  display: grid;
+  grid-template-columns: 10.5vw 10vw 20vw 20vw 20vw 20vw;
+  padding:5px;
+}
+
+.tableRows h4 {
+  font-family: 'Noto Sans SC', sans-serif;
+  margin:0px 0px 0px 5px;
+  font-weight: 500;
+}
+
+.tableRows div {
+  padding: 5px 0px 5px 0px;
+  cursor: pointer;
+}
+
+.tableRows:hover {
+  background-color:#e8e8e8;
 }

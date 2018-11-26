@@ -33,7 +33,7 @@
   </div>
 
   <div class="menu">
-    <button mat-button class="menuButton">
+    <button mat-button class="menuButton" (click)="handleDeleteFile()">
       <mat-icon>delete_outline</mat-icon>
       <span>Delete</span>
     </button>
@@ -42,5 +42,67 @@
 
 <div class="emptyFillComponent" *ngIf="empty">
   <img src="./../../assets/fill.png" />
-  <p>Empty space is borign add or upload some files.</p>
+  <p>Empty space is boring add or upload some files.</p>
+</div>
+
+<div class="contents" *ngIf="empty === false">
+  <div class="contentList">
+    <h2>Files</h2>
+
+
+    <div class="tableHeader">
+        <div>
+        </div>
+
+        <div>
+          <mat-icon>description</mat-icon>
+        </div>
+
+        <div>
+          <h4>Name</h4>
+        </div>
+
+        <div>
+          <h4>Modified</h4>
+        </div>
+
+        <div>
+          <h4>Modified By</h4>
+        </div>
+
+        <div>
+          <h4>File Size</h4>
+        </div>
+    </div>
+
+    <div class="tableRows" *ngFor="let content of contentObj">
+      <div>
+        <!-- <mat-radio-group class="example-radio-group" [(ngModel)]="selectedObj"> -->
+          <mat-radio-button name="content" value="content" color="primary" (click)="handleSelect(content)">  </mat-radio-button>
+        <!-- </mat-radio-group> -->
+      </div>
+
+      <div>
+        <mat-icon *ngIf="content.type === 'folder'">folder</mat-icon>
+        <mat-icon *ngIf="content.type === 'file'">description</mat-icon>
+        <mat-icon *ngIf="content.type === 'image'">image</mat-icon>
+      </div>
+
+      <div>
+        <h4>{{content.name}}</h4>
+      </div>
+
+      <div>
+        <h4>Modified</h4>
+      </div>
+
+      <div>
+        <h4>{{content.userId}}</h4>
+      </div>
+
+      <div>
+        <h4>File Size</h4>
+      </div>
+    </div>
+  </div>
 </div>

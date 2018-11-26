@@ -1,0 +1,12 @@
+h4 {
+  color:#163f7f;
+  margin: 20px;
+  font-size:20px;
+  font-weight: bold;
+}
+
+.fileUploader {
+  display: block;
+  margin-left: 150px;
+  overflow: hidden;
+}
