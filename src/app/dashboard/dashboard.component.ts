@@ -9,8 +9,9 @@ import { DashboardService } from '../dashboard.service';
 
 
 
-export interface DialogData {
-  animal: string;
+export interface UserObj {
+  userId: string;
+  type: string;
   name: string;
 }
 
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit {
   empty: boolean = true;
   type: string = null;
   name: string = null;
+  userObj: UserObj = {};
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
 
@@ -47,7 +49,14 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
-        this.dashboardservice.createFile(this.userId,result,this.type)
+
+        this.userObj:{
+          userId: this.userId,
+          name: result,
+          type: this.type
+        }
+
+        this.dashboardservice.createFile(userObj)
                              .subscribe((response:any) => {
                                console.log(response);
                              });
@@ -61,8 +70,6 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-
-  }
-
-
+    });
+}
 }
