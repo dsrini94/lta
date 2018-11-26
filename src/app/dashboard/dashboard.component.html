@@ -9,6 +9,13 @@
   <div></div>
 
   <div class="menu">
+    <button mat-button class="menuButton" (click)="openUploadDialog()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back</span>
+    </button>
+  </div>
+
+  <div class="menu">
     <button mat-button [matMenuTriggerFor]="menu" class="menuButton">
       <mat-icon>add</mat-icon>
       <span>New</span>
