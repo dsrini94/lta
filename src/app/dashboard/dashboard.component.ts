@@ -60,6 +60,15 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getUserId();
+    this.getFileData();
+  }
+
+  getFileData():void {
+
+    this.dashboardservice.getDirectories(this.userId)
+                         .subscribe((response:any) => {
+                           console.log(response);
+                         });
   }
 
   getUserId(): void {

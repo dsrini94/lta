@@ -9,9 +9,9 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  // getDirectory(){
-  //   return this.http.post('http://localhost:3000/file/createFile',userObj)
-  // }
+  getDirectories(userId){
+    return this.http.post('http://localhost:3000/file/createFile',userId)
+  }
 
   createFile(userObj) {
     return this.http.post('http://localhost:3000/file/createFile',userObj);
