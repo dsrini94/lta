@@ -1,7 +1,0 @@
-(err) => {
-                if(err)
-                console.log("error in creating directory");
-                else{
-                console.log("file is successfully created");
-                }
-            }
