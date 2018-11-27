@@ -236,7 +236,9 @@ router.post('/deleteFile', function(req, res, next) {
 
 });
 
-router.get('/getFiles', function(req, res, next){
+router.post('/getFiles', function(req, res, next){
+    var fileDetails=[];
+    var Folderpath=req.body.path;
     fs.readdir(Folderpath, function(err, items) {
         if(items.length>0){
         for (var i=0; i<items.length; i++) {
