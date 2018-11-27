@@ -40,7 +40,8 @@ router.post('/createFile', function(req, res, next) {
                   }
                   else
                   {
-                    fs.writeFile(path, (err) => {
+                      var filecontent=" ";
+                    fs.writeFile(path,filecontent, (err) => {
                         if(err)
                         console.log("error in creating directory");
                         else{
@@ -68,7 +69,8 @@ router.post('/createFile', function(req, res, next) {
                             else
                                 ftype="file";
                                   var tempItemObj={
-                                      file: nameFile[namelength-1],
+                                      file:file,
+                                      name: nameFile[namelength-1],
                                       size:stats["size"],
                                       mtime:time,
                                       type:ftype
@@ -106,7 +108,8 @@ router.post('/createFile', function(req, res, next) {
           }
           else
           {
-            fs.writeFile(path, (err) => {
+            var filecontent=" ";
+            fs.writeFile(path,filecontent, (err) => {
                 if(err)
                 console.log("error in creating directory");
                 else{
@@ -134,7 +137,8 @@ router.post('/createFile', function(req, res, next) {
                     else
                         ftype="file";
                           var tempItemObj={
-                              file: nameFile[namelength-1],
+                              file:file,
+                              name: nameFile[namelength-1],
                               size:stats["size"],
                               mtime:time,
                               type:ftype
@@ -200,7 +204,8 @@ router.post('/deleteFile', function(req, res, next) {
                         else
                             ftype="file";
                               var tempItemObj={
-                                  file: nameFile[namelength-1],
+                                  file:file,
+                                  name: nameFile[namelength-1],
                                   size:stats["size"],
                                   mtime:time,
                                   type:ftype
