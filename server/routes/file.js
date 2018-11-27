@@ -166,18 +166,17 @@ router.post('/createFile', function(req, res, next) {
 
 router.post('/deleteFile', function(req, res, next) {
     var rimraf = require('rimraf');
+    console.log(req.body.file);
     var fileDetails = [];
-    var UserFolder1=(__dirname+'../../');
-    var UserFolder=UserFolder1+"/Users/"+req.body.userId;
-    let filename = req.body.name;
-    var Folderpath=UserFolder+"/";
-    var path=Folderpath+filename;
+    var path=req.body.file;
     rimraf(path, function (err) {
         if(err){
             console.log("error in deleting file");
         }
         else{
             console.log('done');
+            var Folderpath=path+"/../";
+            console.log(Folderpath);
             fs.readdir(Folderpath, function(err, items) {
                 if(items.length>0){
                 for (var i=0; i<items.length; i++) {
@@ -238,7 +237,12 @@ router.post('/deleteFile', function(req, res, next) {
 
 router.post('/getFiles', function(req, res, next){
     var fileDetails=[];
-    var Folderpath=req.body.path;
+    var UserFolder1=(__dirname+'../../');
+    var UserFolder=UserFolder1+"/Users/"+req.body.userId;
+    let filename = req.body.name;
+    var Folderpath=UserFolder+"/";
+    var path=Folderpath+filename;
+
     fs.readdir(Folderpath, function(err, items) {
         if(items.length>0){
         for (var i=0; i<items.length; i++) {
