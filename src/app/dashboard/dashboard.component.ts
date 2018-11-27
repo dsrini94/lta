@@ -15,6 +15,14 @@ export interface UserObj {
   name: string,
 };
 
+export interface FileObj {
+  file:string,
+  name: string,
+  size:number,
+  mtime:string,
+  type:string
+}
+
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +36,7 @@ export class DashboardComponent implements OnInit {
   type: string = null;
   name: string = null;
   userObj: UserObj = null;
-  selectedObj: UserObj;
+  selectedObj: FileObj;
   currentPath: string = null;
   contentObj: UserObj[] = [
     {
@@ -108,9 +116,11 @@ export class DashboardComponent implements OnInit {
                          });
   }
 
-
-  handleSelect(selectedObj: UserObj):void {
-    this.selectedObj = selectedObj
+  handleSelect(selectedObj: FileObj):void {
+    this.selectedObj = selectedObj;
   }
 
+  selectFolder(selectedFolder: FileObj):void {
+    console.log(selectedFolder);
+  }
 }

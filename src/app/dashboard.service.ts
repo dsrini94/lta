@@ -9,6 +9,10 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
+  // getDirectory(){
+  //   return this.http.post('http://localhost:3000/file/createFile',userObj)
+  // }
+
   createFile(userObj) {
     return this.http.post('http://localhost:3000/file/createFile',userObj);
   }
@@ -17,14 +21,8 @@ export class DashboardService {
     return this.http.post('http://localhost:3000/file/deleteFile',selectedObj);
   }
 
-//   postFile(fileToUpload: File): Observable<boolean> {
-//     const endpoint = 'your-destination-url';
-//     const formData: FormData = new FormData();
-//     formData.append('fileKey', fileToUpload, fileToUpload.name);
-//     return this.httpClient
-//       .post(endpoint, formData, { headers: yourHeadersConfig })
-//       .map(() => { return true; })
-//       .catch((e) => this.handleError(e));
-// }
+  postFile(fileToUpload: File) {
+    return this.http.post('http://localhost:3000/file/deleteFile',fileToUpload);
+  }
 
 }
