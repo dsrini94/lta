@@ -8,7 +8,8 @@ router.post('/createFile', function(req, res, next) {
     var fileDetails = [];
     console.log("inside createfile route");
     console.log(__dirname);
-    var UserFolder1=(__dirname+'../../');
+    var UserFolder1=(__dirname+'/../');
+    console.log(UserFolder1);
     var UserFolder=UserFolder1+"/Users/"+req.body.userId;
     console.log("1",UserFolder);
     fs.access(UserFolder, function(err) {
