@@ -50,10 +50,17 @@ router.post('/createFile', function(req, res, next) {
                       }
                       function generate_callback(file, index, folderCount) {
                           return function(err, stats) {
+
+                            var time=stats["mtime"].split('T');
+
+                            console.log(time);
+
                                   var tempItemObj={
                                       file: file,
                                       size:stats["size"],
-                                      mtime:stats["mtime"]
+                                      mtime:time[0],
+                                      name:req.body.name,
+                                      type:req.body.type
                                   };
                                   fileDetails.push(tempItemObj);7
                                   console.log('Index: ', index);
@@ -96,10 +103,18 @@ router.post('/createFile', function(req, res, next) {
               }
               function generate_callback(file, index, folderCount) {
                   return function(err, stats) {
+
+                    var time=stats["mtime"];
+                    time = JSON.stringify(time).toString().split('T');
+                    time = time[0].substr(1);
+
+                    
                           var tempItemObj={
                               file: file,
                               size:stats["size"],
-                              mtime:stats["mtime"]
+                              mtime:time,
+                              name:'name',
+                              type:req.body.type
                           };
                           fileDetails.push(tempItemObj);7
                           console.log('Index: ', index);
