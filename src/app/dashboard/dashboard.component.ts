@@ -121,7 +121,7 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
-                           console.log(response);
+                           this.contentObj = response.fileData;
                          });
   }
 

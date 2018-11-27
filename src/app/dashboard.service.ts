@@ -18,6 +18,7 @@ export class DashboardService {
   }
 
   deleteFile(selectedObj) {
+    console.log('---->',selectedObj);
     return this.http.post('http://localhost:3000/file/deleteFile',selectedObj);
   }
 

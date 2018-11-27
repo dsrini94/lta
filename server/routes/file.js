@@ -167,11 +167,8 @@ router.post('/createFile', function(req, res, next) {
 router.post('/deleteFile', function(req, res, next) {
     var rimraf = require('rimraf');
     var fileDetails = [];
-    var UserFolder1=(__dirname+'../../');
-    var UserFolder=UserFolder1+"/Users/"+req.body.userId;
-    let filename = req.body.name;
-    var Folderpath=UserFolder+"/";
-    var path=Folderpath+filename;
+
+    console.log(req.body.file);
     rimraf(path, function (err) {
         if(err){
             console.log("error in deleting file");
