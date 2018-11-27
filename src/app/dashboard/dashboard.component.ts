@@ -88,6 +88,7 @@ export class DashboardComponent implements OnInit {
 
   openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDialogComponent ,{
+      width:'350px'
     })
 
     dialogRef.afterClosed().subscribe(result => {

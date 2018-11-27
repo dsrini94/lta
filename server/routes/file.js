@@ -8,7 +8,8 @@ router.post('/createFile', function(req, res, next) {
     var fileDetails = [];
     console.log("inside createfile route");
     console.log(__dirname);
-    var UserFolder1=(__dirname+'../../');
+    var UserFolder1=(__dirname+'/../');
+    console.log(UserFolder1);
     var UserFolder=UserFolder1+"/Users/"+req.body.userId;
     console.log("1",UserFolder);
     fs.access(UserFolder, function(err) {
@@ -57,7 +58,7 @@ router.post('/createFile', function(req, res, next) {
                                   fileDetails.push(tempItemObj);7
                                   console.log('Index: ', index);
                                   console.log('Folder Count', folderCount)
-                                  
+
                                   if(index+1 == folderCount){
                                       console.log('Reached end of the list',i)
                                       console.log('Inside: ', fileDetails);
@@ -65,14 +66,59 @@ router.post('/createFile', function(req, res, next) {
                                   }
                               }
                       };
-                         
+
                   });
             }
             });
         }
+        else {
+          let filename = req.body.name;
+          var Folderpath=UserFolder+"/";
+          console.log("6",Folderpath);
+          var path=Folderpath+filename;
+          console.log("7",path);
+          console.log("8",req.body.type);
+          if(req.body.type=="folder"){
+        fs.mkdir(path,function(err)
+      {
+          if(err)
+          console.log("error in creating directory");
+          else{
+          console.log("file is successfully created");
+      }
       });
-         
-});
+          }
+          fs.readdir(Folderpath, function(err, items) {
+              for (var i=0; i<items.length; i++) {
+                  var file = Folderpath + '/' + items[i];
+                 fs.stat(file, generate_callback(file, i, items.length));
+                 console.log(' Outside Filedetails: ', fileDetails);
+              }
+              function generate_callback(file, index, folderCount) {
+                  return function(err, stats) {
+                          var tempItemObj={
+                              file: file,
+                              size:stats["size"],
+                              mtime:stats["mtime"]
+                          };
+                          fileDetails.push(tempItemObj);7
+                          console.log('Index: ', index);
+                          console.log('Folder Count', folderCount)
+
+                          if(index+1 == folderCount){
+                              console.log('Reached end of the list',i)
+                              console.log('Inside: ', fileDetails);
+                              res.json({fileData:fileDetails});
+                          }
+                      }
+              };
+
+          });
+    }
+    });
+
+      });
+
 
 router.post('/deleteFile', function(req, res, next) {
     var rimraf = require('rimraf');
@@ -82,7 +128,7 @@ router.post('/deleteFile', function(req, res, next) {
     let filename = req.body.name;
     var Folderpath=UserFolder+"/";
     var path=Folderpath+filename;
-    rimraf(path, function (err) {  
+    rimraf(path, function (err) {
         if(err){
             console.log("error in deleting file");
         }
@@ -112,7 +158,7 @@ router.post('/deleteFile', function(req, res, next) {
                             fileDetails.push(tempItemObj);
                             console.log('Index: ', index);
                             console.log('Folder Count', folderCount)
-                            
+
                             if(index+1 == folderCount){
                                 console.log('Reached end of the list',i)
                                 console.log('Inside: ', fileDetails);
@@ -124,14 +170,13 @@ router.post('/deleteFile', function(req, res, next) {
             else
             {
                 res.json({fileData:fileDetails});
-            }  
+            }
             });
-        
+
         }
-        
+
     });
-    
+
 });
 
 module.exports = router;
- 

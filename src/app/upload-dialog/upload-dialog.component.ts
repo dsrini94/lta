@@ -9,6 +9,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export class UploadDialogComponent implements OnInit {
 
   fileToUpload: File = null;
+  fileName: string = null;
 
   afuConfig = {
     uploadAPI: {
@@ -24,6 +25,8 @@ export class UploadDialogComponent implements OnInit {
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
+    this.fileName = this.fileToUpload.name
+    console.log(this.fileName);
   }
 
   onButtonClick(): void {
