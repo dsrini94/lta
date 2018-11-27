@@ -11,27 +11,23 @@ router.post('/createFile', function(req, res, next) {
     var UserFolder1=(__dirname+'/../');
     console.log(UserFolder1);
     var UserFolder=UserFolder1+"/Users/"+req.body.userId;
-    console.log("1",UserFolder);
+    console.log(UserFolder);
     fs.access(UserFolder, function(err) {
         if (err && err.code === 'ENOENT') {
-            console.log("2-creating user folder");
+            console.log("creating user folder");
             fs.mkdir(UserFolder,function(err)
             {
                 if(err)
-                console.log("3-error in creating directory");
+                console.log("error in creating directory");
                 else{
                     console.log(UserFolder);
-                console.log("3-file is successfully created");
-                console.log("4",UserFolder);
+                console.log("file is successfully created");
                 fs.access(UserFolder, fs.constants.F_OK, (err) => {
-                    console.log(`${UserFolder} ${err ? '5-does not exist' : '5-exists'}`);
+                    console.log(`${UserFolder} ${err ? 'does not exist' : 'exists'}`);
                   });
                   let filename = req.body.name;
                   var Folderpath=UserFolder+"/";
-                  console.log("6",Folderpath);
                   var path=Folderpath+filename;
-                  console.log("7",path);
-                  console.log("8",req.body.type);
                   if(req.body.type=="folder"){
                 fs.mkdir(path,function(err)
               {
@@ -42,6 +38,16 @@ router.post('/createFile', function(req, res, next) {
               }
               });
                   }
+                  else
+                  {
+                    fs.writeFile(path, (err) => {
+                        if(err)
+                        console.log("error in creating directory");
+                        else{
+                        console.log("file is successfully created");
+                    }
+                  });
+                }
                   fs.readdir(Folderpath, function(err, items) {
                       for (var i=0; i<items.length; i++) {
                           var file = Folderpath + '/' + items[i];
@@ -50,18 +56,31 @@ router.post('/createFile', function(req, res, next) {
                       }
                       function generate_callback(file, index, folderCount) {
                           return function(err, stats) {
+                            var time=stats["mtime"];
+                            time = JSON.stringify(time).toString().split('T');
+                            time = time[0].substr(1);
+                            var nameFile=file.split('//');
+                            var namelength=nameFile.length;
+                           var types= stats.isDirectory();
+                           var ftype;
+                           if(types==true)
+                                ftype="folder";
+                            else
+                                ftype="file";
                                   var tempItemObj={
-                                      file: file,
+                                      file: nameFile[namelength-1],
                                       size:stats["size"],
-                                      mtime:stats["mtime"]
+                                      mtime:time,
+                                      type:ftype
                                   };
-                                  fileDetails.push(tempItemObj);7
+                                  fileDetails.push(tempItemObj);
+                                  console.log(tempItemObj.mtime);
                                   console.log('Index: ', index);
                                   console.log('Folder Count', folderCount)
 
                                   if(index+1 == folderCount){
                                       console.log('Reached end of the list',i)
-                                      console.log('Inside: ', fileDetails);
+                                      console.log('Inside:', fileDetails);
                                       res.json({fileData:fileDetails});
                                   }
                               }
@@ -74,10 +93,7 @@ router.post('/createFile', function(req, res, next) {
         else {
           let filename = req.body.name;
           var Folderpath=UserFolder+"/";
-          console.log("6",Folderpath);
           var path=Folderpath+filename;
-          console.log("7",path);
-          console.log("8",req.body.type);
           if(req.body.type=="folder"){
         fs.mkdir(path,function(err)
       {
@@ -88,6 +104,16 @@ router.post('/createFile', function(req, res, next) {
       }
       });
           }
+          else
+          {
+            fs.writeFile(path, (err) => {
+                if(err)
+                console.log("error in creating directory");
+                else{
+                console.log("file is successfully created");
+                }
+            }); 
+          }
           fs.readdir(Folderpath, function(err, items) {
               for (var i=0; i<items.length; i++) {
                   var file = Folderpath + '/' + items[i];
@@ -96,10 +122,22 @@ router.post('/createFile', function(req, res, next) {
               }
               function generate_callback(file, index, folderCount) {
                   return function(err, stats) {
+                    var time=stats["mtime"];
+                    time = JSON.stringify(time).toString().split('T');
+                    time = time[0].substr(1);
+                    var nameFile=file.split('//');
+                    var namelength=nameFile.length;
+                   var types= stats.isDirectory();
+                   var ftype;
+                   if(types==true)
+                        ftype="folder";
+                    else
+                        ftype="file";
                           var tempItemObj={
-                              file: file,
+                              file: nameFile[namelength-1],
                               size:stats["size"],
-                              mtime:stats["mtime"]
+                              mtime:time,
+                              type:ftype
                           };
                           fileDetails.push(tempItemObj);7
                           console.log('Index: ', index);
@@ -117,7 +155,7 @@ router.post('/createFile', function(req, res, next) {
     }
     });
 
-      });
+ });
 
 
 router.post('/deleteFile', function(req, res, next) {
@@ -148,12 +186,24 @@ router.post('/deleteFile', function(req, res, next) {
                             console.log('Size in stats exists')
                         }
                         else{
-                            console.log('Size in stats does noe exists')
+                            console.log('Size in stats does not exists')
                         }
-                            var tempItemObj={
-                                file: file,
-                                size:stats["size"],
-                                mtime:stats["mtime"]
+                        var time=stats["mtime"];
+                        time = JSON.stringify(time).toString().split('T');
+                        time = time[0].substr(1);
+                        var nameFile=file.split('//');
+                        var namelength=nameFile.length;
+                       var types= stats.isDirectory();
+                       var ftype;
+                       if(types==true)
+                            ftype="folder";
+                        else
+                            ftype="file";
+                              var tempItemObj={
+                                  file: nameFile[namelength-1],
+                                  size:stats["size"],
+                                  mtime:time,
+                                  type:ftype
                             };
                             fileDetails.push(tempItemObj);
                             console.log('Index: ', index);
