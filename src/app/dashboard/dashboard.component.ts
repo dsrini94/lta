@@ -15,6 +15,14 @@ export interface UserObj {
   name: string,
 };
 
+export interface FileObj {
+  file:string,
+  name: string,
+  size:number,
+  mtime:string,
+  type:string
+}
+
 
 @Component({
   selector: 'app-dashboard',
@@ -24,11 +32,12 @@ export interface UserObj {
 export class DashboardComponent implements OnInit {
 
   userId: string = null;
-  empty: boolean = false;
+  empty: boolean = true;
   type: string = null;
   name: string = null;
   userObj: UserObj = null;
-  selectedObj: UserObj;
+  selectedObj: FileObj;
+  currentPath: string = null;
   contentObj: UserObj[] = [
     {
       userId:'srini',
@@ -79,7 +88,9 @@ export class DashboardComponent implements OnInit {
 
         this.dashboardservice.createFile(this.userObj)
                              .subscribe((response:any) => {
-                               console.log(response);
+                               this.empty = false;
+                               this.currentPath = response.fileData[0].file;
+                               this.contentObj = response.fileData;
                              });
       }
     });
@@ -105,9 +116,11 @@ export class DashboardComponent implements OnInit {
                          });
   }
 
-
-  handleSelect(selectedObj: UserObj):void {
-    this.selectedObj = selectedObj
+  handleSelect(selectedObj: FileObj):void {
+    this.selectedObj = selectedObj;
   }
 
+  selectFolder(selectedFolder: FileObj):void {
+    console.log(selectedFolder);
+  }
 }

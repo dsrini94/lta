@@ -117,7 +117,7 @@ router.post('/createFile', function(req, res, next) {
                 else{
                 console.log("file is successfully created");
                 }
-            }); 
+            });
           }
           fs.readdir(Folderpath, function(err, items) {
               for (var i=0; i<items.length; i++) {
