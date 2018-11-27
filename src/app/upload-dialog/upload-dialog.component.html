@@ -1,10 +1,11 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="form-group">
+    <label for="file">Choose File</label>
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
+</div>
 
-
-<h4>File Upload</h4>
-
-<div class="fileUploader">
-  <angular-file-uploader
-        [config]="afuConfig">
-  </angular-file-uploader>
+<div class="buttonContainer">
+  <button mat-raised-button color="warn" (click)="onButtonClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onButtonClick()">Save</button>
 </div>

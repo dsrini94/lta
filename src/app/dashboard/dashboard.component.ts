@@ -59,9 +59,6 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog(type): void {
-
-    console.log(this.selectedObj);
-
     this.type = type;
 
     const dialogRef = this.dialog.open(FileDialogComponent, {
@@ -94,6 +91,7 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 

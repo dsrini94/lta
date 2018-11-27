@@ -3,7 +3,7 @@
       path = require('path'),
       app = express(),
       port = process.env.PORT || 3001;
-	  
+
 app.use(express.static(__dirname+'/dist/LTA/'));
 
 app.get('/',(req,res) => res.sendFile(path.join(__dirname)));
