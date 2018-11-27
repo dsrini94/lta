@@ -1,12 +1,36 @@
 h4 {
   color:#163f7f;
-  margin: 20px;
+  margin: 20px 0px;
   font-size:20px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-.fileUploader {
-  display: block;
-  margin-left: 150px;
+.buttonContainer {
+  float: right;
+}
+
+.buttonContainer button{
+  margin:10px 5px 5px 5px
+}
+
+.upload-btn-wrapper {
+  position: relative;
   overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper span {
+  margin-left: 20px;
+}
+
+.upload-btn-wrapper button mat-icon {
+  margin-right: 5px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }

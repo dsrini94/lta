@@ -1,10 +1,31 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <div class="form-group">
+    <label for="file">Choose File</label>
+    <button mat-raised-button class="menuButton" color="primary">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Upload File</span>
+    </button>
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
+    <h1>{{fileName}}</h1>
+</div> -->
 
+<h4>Choose a File to Upload</h4>
 
-<h4>File Upload</h4>
+<div class="upload-btn-wrapper">
+  <button mat-raised-button class="menuButton" color="primary" class="btn">
+    <mat-icon>cloud_upload</mat-icon>
+    <span>Upload File</span>
+  </button>
+  <input type="file" name="myfile" (change)="handleFileInput($event.target.files)"/>
 
-<div class="fileUploader">
-  <angular-file-uploader
-        [config]="afuConfig">
-  </angular-file-uploader>
+  <span>{{fileName}}</span>
+</div>
+
+<br/>
+<br/>
+
+<div class="buttonContainer">
+  <button mat-raised-button color="warn" (click)="onButtonClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onButtonClick()">Save</button>
 </div>

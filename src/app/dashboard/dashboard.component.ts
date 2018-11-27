@@ -59,9 +59,6 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog(type): void {
-
-    console.log(this.selectedObj);
-
     this.type = type;
 
     const dialogRef = this.dialog.open(FileDialogComponent, {
@@ -91,9 +88,11 @@ export class DashboardComponent implements OnInit {
 
   openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDialogComponent ,{
+      width:'350px'
     })
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 
