@@ -23,6 +23,10 @@ export interface FileObj {
   type:string
 }
 
+ 
+  export interface userIdObj{
+    userId: string
+  }
 
 @Component({
   selector: 'app-dashboard',
@@ -38,6 +42,7 @@ export class DashboardComponent implements OnInit {
   userObj: UserObj = null;
   selectedObj: FileObj;
   currentPath: string = null;
+  userIdObj:userIdObj;
   contentObj: UserObj[] = [
     {
       userId:'srini',
@@ -64,10 +69,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getFileData():void {
-
-    this.dashboardservice.getDirectories(this.userId)
+    this.userIdObj={
+     userId:this.userId
+      }
+    this.dashboardservice.getDirectories(this.userIdObj)
                          .subscribe((response:any) => {
-                           console.log(response);
+                           this.empty=false;
+                          this.contentObj = response.fileData;
                          });
   }
 
@@ -112,7 +120,9 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.dashboardservice.postFile(result).subscribe((response:any)=>{
+        console.log(response);
+      })
     });
   }
 
@@ -121,7 +131,7 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
-                           console.log(response);
+                          this.contentObj = response.fileData;
                          });
   }
 
