@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { FileDialogComponent } from '../file-dialog/file-dialog.component';
 import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { DashboardService } from '../dashboard.service';
 
 
@@ -23,6 +25,11 @@ export interface FileObj {
   type:string
 }
 
+export interface FileUploadObj {
+  file:File,
+  path:string
+}
+
 
 @Component({
   selector: 'app-dashboard',
@@ -32,12 +39,13 @@ export interface FileObj {
 export class DashboardComponent implements OnInit {
 
   userId: string = null;
-  empty: boolean = true;
+  empty: boolean = false;
   type: string = null;
   name: string = null;
   userObj: UserObj = null;
   selectedObj: FileObj;
   currentPath: string = null;
+  fileUploadObj: FileUploadObj = null;
   contentObj: UserObj[] = [
     {
       userId:'srini',
@@ -56,7 +64,7 @@ export class DashboardComponent implements OnInit {
   ]
 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
+  constructor(private location: Location,private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
 
   ngOnInit() {
     this.getUserId();
@@ -97,9 +105,12 @@ export class DashboardComponent implements OnInit {
 
         this.dashboardservice.createFile(this.userObj)
                              .subscribe((response:any) => {
-                               this.empty = false;
-                               this.currentPath = response.fileData[0].file;
-                               this.contentObj = response.fileData;
+                               if(response!=null)
+                               {
+                                 this.empty = false;
+                                 this.currentPath = response.fileData[0].file;
+                                 this.contentObj = response.fileData;
+                               }
                              });
       }
     });
@@ -112,10 +123,28 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+        this.fileUploadObj = {
+          file:result,
+          path:this.currentPath
+        }
+
+        this.dashboardservice.postFile(this.fileUploadObj)
+                             .subscribe((result:any)=>{
+                               console.log(result);
+                             })
     });
   }
 
+  confirmDialog():void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent,{
+      width:'350px'
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+          if(result!=null)
+            this.handleDeleteFile();
+    })
+  }
 
   handleDeleteFile():void {
 
@@ -123,6 +152,10 @@ export class DashboardComponent implements OnInit {
                          .subscribe((response:any) => {
                            this.contentObj = response.fileData;
                          });
+  }
+
+  handleLogout(): void {
+    this.location.back();
   }
 
   handleSelect(selectedObj: FileObj):void {

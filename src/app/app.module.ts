@@ -26,6 +26,7 @@ import {
         MatTableModule } from '@angular/material';
 
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     LoginComponent,
     DashboardComponent,
     FileDialogComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
   ],
   entryComponents: [
     FileDialogComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    ConfirmDialogComponent
   ],
   providers: [
     DashboardService

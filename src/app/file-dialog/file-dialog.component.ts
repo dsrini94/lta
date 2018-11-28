@@ -16,8 +16,11 @@ export class FileDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  onButtonClick(): void {
-    this.dialogRef.close(this.name);
+  onButtonClick(choice: string): void {
+    if(choice === "save")
+      this.dialogRef.close(this.name);
+    else
+    this.dialogRef.close(null);
   }
 
 }

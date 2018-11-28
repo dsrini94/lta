@@ -26,7 +26,6 @@ export class UploadDialogComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.fileName = this.fileToUpload.name
-    console.log(this.fileName);
   }
 
   onButtonClick(): void {

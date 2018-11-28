@@ -18,12 +18,14 @@ export class DashboardService {
   }
 
   deleteFile(selectedObj) {
-    console.log('---->',selectedObj);
     return this.http.post('http://localhost:3000/file/deleteFile',selectedObj);
   }
 
-  postFile(fileToUpload: File) {
-    return this.http.post('http://localhost:3000/file/deleteFile',fileToUpload);
+  postFile(fileToUpload) {
+    console.log(fileToUpload);
+    const formData: FormData = new FormData();
+    formData.append('myfile', fileToUpload, fileToUpload.name);
+    return this.http.post('http://localhost:3000/file/deleteFile', formData);
   }
 
 }

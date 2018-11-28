@@ -1,10 +1,10 @@
-<h4>Enter {{data.type | uppercase}} Name</h4>
+<h4>Enter Name for your {{data.type | uppercase}}</h4>
 
 <mat-form-field class="example-full-width">
-    <input matInput placeholder="{{data.type | uppercase}} Name" [(ngModel)]="name">
+    <input matInput placeholder="{{data.type}} Name" [(ngModel)]="name">
 </mat-form-field>
 
 <div class="buttonContainer">
-  <button mat-raised-button color="warn" (click)="onButtonClick()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onButtonClick()">Save</button>
+  <button mat-raised-button color="warn" (click)="onButtonClick('cancel')">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onButtonClick('save')">Save</button>
 </div>

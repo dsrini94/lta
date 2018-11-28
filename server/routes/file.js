@@ -9,9 +9,9 @@ router.post('/createFile', function(req, res, next) {
     console.log("inside createfile route");
     console.log(__dirname);
     var UserFolder1=(__dirname+'/../');
-    console.log(UserFolder1);
-    var UserFolder=UserFolder1+"/Users/"+req.body.userId;
-    console.log(UserFolder);
+    console.log('Printing Userfolder: ', UserFolder1);
+    var UserFolder=UserFolder1+"Users/"+req.body.userId;
+    console.log('Printing Userfolder again: ', UserFolder);
     fs.access(UserFolder, function(err) {
         if (err && err.code === 'ENOENT') {
             console.log("creating user folder");
@@ -26,7 +26,8 @@ router.post('/createFile', function(req, res, next) {
                     console.log(`${UserFolder} ${err ? 'does not exist' : 'exists'}`);
                   });
                   let filename = req.body.name;
-                  var Folderpath=UserFolder+"/";
+                  // var Folderpath=UserFolder+"/";
+                  var Folderpath=UserFolder;
                   var path=Folderpath+filename;
                   if(req.body.type=="folder"){
                 fs.mkdir(path,function(err)
@@ -166,16 +167,26 @@ router.post('/createFile', function(req, res, next) {
 
 router.post('/deleteFile', function(req, res, next) {
     var rimraf = require('rimraf');
+    console.log('Printing Path: ', req.body.file);
     var fileDetails = [];
+    var path=req.body.file;
 
-    console.log(req.body.file);
+    if(path.includes('//')){
+      console.log('Double Slash exists');
+      path = path.replace('//', '/')
+      console.log('Printing path again: ', path);
+    }
     rimraf(path, function (err) {
         if(err){
             console.log("error in deleting file");
         }
         else{
             console.log('done');
+            var Folderpath=path+"/../..";
+            console.log(Folderpath);
             fs.readdir(Folderpath, function(err, items) {
+              console.log('Inside readaddir!!!!!!!!!!!!!!!!!!!!!!!!');
+              console.log('Items: ', items );
                 if(items.length>0){
                 for (var i=0; i<items.length; i++) {
                     var file = Folderpath + '/' + items[i];
@@ -235,7 +246,12 @@ router.post('/deleteFile', function(req, res, next) {
 
 router.post('/getFiles', function(req, res, next){
     var fileDetails=[];
-    var Folderpath=req.body.path;
+    var UserFolder1=(__dirname+'../../');
+    var UserFolder=UserFolder1+"/Users/"+req.body.userId;
+    let filename = req.body.name;
+    var Folderpath=UserFolder+"/";
+    var path=Folderpath+filename;
+
     fs.readdir(Folderpath, function(err, items) {
         if(items.length>0){
         for (var i=0; i<items.length; i++) {

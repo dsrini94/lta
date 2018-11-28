@@ -1,7 +1,8 @@
 <div class="appbarComponent">
   <img src="./../../assets/logo.jpeg" />
   <p class="branding">Drive</p>
-  <p class="greetings">Hello {{userId | uppercase }}</p>
+  <p class="greetings" >Hello {{userId | uppercase }}</p>
+  <mat-icon (click)="handleLogout()">exit_to_app</mat-icon>
 </div>
 
 <div class="menubar">
@@ -21,13 +22,35 @@
       <span>New</span>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openDialog('file')">
-        <mat-icon>file_copy</mat-icon>
-        <span>File</span>
-      </button>
+
       <button mat-menu-item (click)="openDialog('folder')">
         <mat-icon>featured_video</mat-icon>
         <span>Folder</span>
+      </button>
+
+      <button mat-menu-item (click)="openDialog('Textfile')">
+        <mat-icon>event_note</mat-icon>
+        <span>Textfile</span>
+      </button>
+
+      <button mat-menu-item (click)="openDialog('Word document')">
+        <mat-icon>file_copy</mat-icon>
+        <span>Word document</span>
+      </button>
+
+      <button mat-menu-item (click)="openDialog('Excel workbook')">
+        <mat-icon>grid_on</mat-icon>
+        <span>Excel workbook</span>
+      </button>
+
+      <button mat-menu-item (click)="openDialog('PowerPoint Presentation')">
+        <mat-icon>filter_none</mat-icon>
+        <span>PowerPoint Presentation</span>
+      </button>
+
+      <button mat-menu-item (click)="openDialog('Forms for Excel')">
+        <mat-icon>table_chart</mat-icon>
+        <span>Forms for Excel</span>
       </button>
     </mat-menu>
   </div>
@@ -40,7 +63,7 @@
   </div>
 
   <div class="menu">
-    <button mat-button class="menuButton" (click)="handleDeleteFile()">
+    <button mat-button class="menuButton" (click)="confirmDialog()">
       <mat-icon>delete_outline</mat-icon>
       <span>Delete</span>
     </button>
