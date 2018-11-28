@@ -25,11 +25,18 @@ export interface FileObj {
   type:string
 }
 
+<<<<<<< HEAD
 export interface FileUploadObj {
   file:File,
   path:string
 }
 
+=======
+ 
+  export interface userIdObj{
+    userId: string
+  }
+>>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
 
 @Component({
   selector: 'app-dashboard',
@@ -45,7 +52,11 @@ export class DashboardComponent implements OnInit {
   userObj: UserObj = null;
   selectedObj: FileObj;
   currentPath: string = null;
+<<<<<<< HEAD
   fileUploadObj: FileUploadObj = null;
+=======
+  userIdObj:userIdObj;
+>>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
   contentObj: UserObj[] = [
     {
       userId:'srini',
@@ -72,10 +83,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getFileData():void {
-
-    this.dashboardservice.getDirectories(this.userId)
+    this.userIdObj={
+     userId:this.userId
+      }
+    this.dashboardservice.getDirectories(this.userIdObj)
                          .subscribe((response:any) => {
-                           console.log(response);
+                           this.empty=false;
+                          this.contentObj = response.fileData;
                          });
   }
 
@@ -123,6 +137,7 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
+<<<<<<< HEAD
         this.fileUploadObj = {
           file:result,
           path:this.currentPath
@@ -132,6 +147,11 @@ export class DashboardComponent implements OnInit {
                              .subscribe((result:any)=>{
                                console.log(result);
                              })
+=======
+      this.dashboardservice.postFile(result).subscribe((response:any)=>{
+        console.log(response);
+      })
+>>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
     });
   }
 
@@ -150,7 +170,11 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
+<<<<<<< HEAD
                            this.contentObj = response.fileData;
+=======
+                          this.contentObj = response.fileData;
+>>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
                          });
   }
 
