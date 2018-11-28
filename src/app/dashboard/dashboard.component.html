@@ -1,5 +1,5 @@
 <div class="appbarComponent">
-  <img src="./../../assets/logo.jpeg" />
+  <img src="./../../assets/LTA.png" />
   <p class="branding">Drive</p>
   <p class="greetings" >Hello {{userId | uppercase }}</p>
   <mat-icon (click)="handleLogout()">exit_to_app</mat-icon>
@@ -10,10 +10,10 @@
   <div></div>
 
   <div class="menu">
-    <button mat-button class="menuButton" (click)="openUploadDialog()">
+    <!-- <button mat-button class="menuButton" (click)="openUploadDialog()">
       <mat-icon>arrow_back</mat-icon>
       <span>Back</span>
-    </button>
+    </button> -->
   </div>
 
   <div class="menu">
@@ -72,7 +72,7 @@
 
 <div class="emptyFillComponent" *ngIf="empty">
   <img src="./../../assets/fill.png" />
-  <p>Empty space is boring add or upload some files.</p>
+  <p>Empty space is boring, add or upload some files.</p>
 </div>
 
 <div class="contents" *ngIf="empty === false">

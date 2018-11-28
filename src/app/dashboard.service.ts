@@ -10,7 +10,6 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getDirectories(userId){
-    console.log("userId",userId);
     return this.http.post('http://localhost:3000/file/getFiles',userId);
   }
 
@@ -23,9 +22,9 @@ export class DashboardService {
   }
 
   postFile(fileToUpload) {
-    console.log(fileToUpload);
     const formData: FormData = new FormData();
-    formData.append('myfile', fileToUpload, fileToUpload.name);
-    return this.http.post('http://localhost:3000/file/deleteFile', formData);
+    formData.append('myfile', fileToUpload,fileToUpload.name);
+    var options = { content: formData };
+    return this.http.post('http://localhost:3000/file/uploadFile', formData);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
@@ -17,7 +17,7 @@ export class UploadDialogComponent implements OnInit {
     }
 };
 
-  constructor(public dialogRef: MatDialogRef<UploadDialogComponent>,
+  constructor(private elem:ElementRef, public dialogRef: MatDialogRef<UploadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
@@ -26,10 +26,27 @@ export class UploadDialogComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.fileName = this.fileToUpload.name
+
+    // let files = this.elem.nativeElement.querySelector('#myfile');
+    //
+    // console.log('----->',files);
+    //
+    // let formData = new FormData();
+    // let file = files[0];
+    // formData.append('myfile',file,file.name);
+    // this.fileToUpload = formData;
+
   }
 
-  onButtonClick(): void {
-    this.dialogRef.close(this.fileToUpload);
+  onButtonClick(choice:string): void {
+
+    if(choice!='cancel')
+    {
+      this.dialogRef.close(this.fileToUpload);
+    }
+    else
+    this.dialogRef.close(null);
+
   }
 
 }

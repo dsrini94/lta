@@ -11,6 +11,7 @@ import { DashboardService } from '../dashboard.service';
 
 
 
+
 export interface UserObj {
   userId: string,
   type: string,
@@ -25,18 +26,18 @@ export interface FileObj {
   type:string
 }
 
-<<<<<<< HEAD
+
 export interface FileUploadObj {
   file:File,
   path:string
 }
 
-=======
- 
+
+
   export interface userIdObj{
     userId: string
   }
->>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
+
 
 @Component({
   selector: 'app-dashboard',
@@ -52,27 +53,26 @@ export class DashboardComponent implements OnInit {
   userObj: UserObj = null;
   selectedObj: FileObj;
   currentPath: string = null;
-<<<<<<< HEAD
   fileUploadObj: FileUploadObj = null;
-=======
   userIdObj:userIdObj;
->>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
-  contentObj: UserObj[] = [
-    {
-      userId:'srini',
-      type:'image',
-      name:'upload.jpg',
-    },
-    {
-      userId:'srini',
-      type:'file',
-      name:'upload.txt',
-    },{
-      userId:'srini',
-      type:'folder',
-      name:'upload',
-    }
-  ]
+  contentObj: UserObj[] = null;
+
+  // [
+  //   {
+  //     userId:'srini',
+  //     type:'image',
+  //     name:'upload.jpg',
+  //   },
+  //   {
+  //     userId:'srini',
+  //     type:'file',
+  //     name:'upload.txt',
+  //   },{
+  //     userId:'srini',
+  //     type:'folder',
+  //     name:'upload',
+  //   }
+  // ]
 
 
   constructor(private location: Location,private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
@@ -83,13 +83,27 @@ export class DashboardComponent implements OnInit {
   }
 
   getFileData():void {
+
     this.userIdObj={
      userId:this.userId
       }
     this.dashboardservice.getDirectories(this.userIdObj)
                          .subscribe((response:any) => {
-                           this.empty=false;
-                          this.contentObj = response.fileData;
+                           if(response!=null)
+                           {
+                             console.log('--------->',response);
+                             console.log(response);
+                             this.empty=false;
+                             this.contentObj = response.fileData;
+                             this.currentPath = response.fileData[0].file;
+
+                           }
+                           else
+                           {
+                             console.log('inside else',response);
+                             this.empty = true;
+                           }
+
                          });
   }
 
@@ -137,21 +151,25 @@ export class DashboardComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-<<<<<<< HEAD
+
+      if(result!=null)
+      {
+
+        console.log(result);
+
         this.fileUploadObj = {
           file:result,
           path:this.currentPath
         }
 
-        this.dashboardservice.postFile(this.fileUploadObj)
+        this.dashboardservice.postFile(result)
                              .subscribe((result:any)=>{
-                               console.log(result);
-                             })
-=======
-      this.dashboardservice.postFile(result).subscribe((response:any)=>{
-        console.log(response);
-      })
->>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
+                               this.getFileData();
+                               // console.log('--------->',result);
+                               // this.contentObj = result.fileData;
+                             });
+      }
+
     });
   }
 
@@ -170,11 +188,15 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
-<<<<<<< HEAD
-                           this.contentObj = response.fileData;
-=======
-                          this.contentObj = response.fileData;
->>>>>>> 921811915f0a93ca914bd7da93d33c47fb7bef79
+                           if(response!=null)
+                           {
+                             this.contentObj = response.fileData;
+                             this.contentObj = response.fileData;
+                           }
+                           else{
+                             this.empty = true;
+                           }
+
                          });
   }
 

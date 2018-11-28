@@ -35,13 +35,15 @@
   transform: translate(-50%,-50%);
   height: 75vh;
   background-color: #fff;
+  width:500px;
 }
 
 .logo{
   display: block;
   margin: auto;
-  width:40%;
-  height:40%;
+  width:50%;
+  height:50%;
+  margin-top: 60px;
 }
 
 .formContainer {

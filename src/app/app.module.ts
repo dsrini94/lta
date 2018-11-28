@@ -28,6 +28,7 @@ import {
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     HttpClientModule,
     MatListModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
   ],
   entryComponents: [
     FileDialogComponent,
