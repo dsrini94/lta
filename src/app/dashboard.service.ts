@@ -27,4 +27,6 @@ export class DashboardService {
     var options = { content: formData };
     return this.http.post('http://localhost:3000/file/uploadFile', formData);
   }
+  
+  
 }

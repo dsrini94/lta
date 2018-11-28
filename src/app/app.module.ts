@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDialogComponent } from './file-dialog/file-dialog.component';
-import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';  
 
 import { DashboardService } from './dashboard.service';
 
