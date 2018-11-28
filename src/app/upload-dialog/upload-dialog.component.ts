@@ -13,8 +13,9 @@ export class UploadDialogComponent implements OnInit {
 
   afuConfig = {
     uploadAPI: {
-      url:"https://example-file-upload-api"
-    }
+      url:"http://localhost:3000/file/uploadFile"
+    },
+    hideProgressBar: false,
 };
 
   constructor(private elem:ElementRef, public dialogRef: MatDialogRef<UploadDialogComponent>,
@@ -26,16 +27,6 @@ export class UploadDialogComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.fileName = this.fileToUpload.name
-
-    // let files = this.elem.nativeElement.querySelector('#myfile');
-    //
-    // console.log('----->',files);
-    //
-    // let formData = new FormData();
-    // let file = files[0];
-    // formData.append('myfile',file,file.name);
-    // this.fileToUpload = formData;
-
   }
 
   onButtonClick(choice:string): void {

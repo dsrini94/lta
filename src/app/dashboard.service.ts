@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,8 @@ export class DashboardService {
     const formData: FormData = new FormData();
     formData.append('myfile', fileToUpload,fileToUpload.name);
     var options = { content: formData };
-    return this.http.post('http://localhost:3000/file/uploadFile', formData);
+    return this.http.post('http://localhost:3000/file/uploadFile', formData,{
+        reportProgress: true,
+      });
   }
 }

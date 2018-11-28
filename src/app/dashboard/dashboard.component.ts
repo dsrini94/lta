@@ -9,6 +9,9 @@ import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component'
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { DashboardService } from '../dashboard.service';
 
+import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
+
+
 
 
 
@@ -147,7 +150,7 @@ export class DashboardComponent implements OnInit {
 
   openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDialogComponent ,{
-      width:'350px'
+      width:'650px'
     })
 
     dialogRef.afterClosed().subscribe(result => {
@@ -163,8 +166,9 @@ export class DashboardComponent implements OnInit {
         }
 
         this.dashboardservice.postFile(result)
-                             .subscribe((result:any)=>{
-                               this.getFileData();
+                             .subscribe((event:any)=>{
+                                  console.log('<-------->',event);
+                                  this.getFileData();
                                // console.log('--------->',result);
                                // this.contentObj = result.fileData;
                              });
