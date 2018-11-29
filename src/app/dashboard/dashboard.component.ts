@@ -9,10 +9,7 @@ import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component'
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { DashboardService } from '../dashboard.service';
 
-import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
-
-
-
+import { HttpClientModule, HttpClient, HttpRequest, HttpEvent ,HttpEventType, HttpResponse } from '@angular/common/http';
 
 
 export interface UserObj {
@@ -59,6 +56,10 @@ export class DashboardComponent implements OnInit {
   fileUploadObj: FileUploadObj = null;
   userIdObj:userIdObj;
   contentObj: UserObj[] = null;
+  color = 'primary';
+  mode = 'determinate';
+  value = 0;
+  loadingMsg:string = ""
 
   // [
   //   {
@@ -78,7 +79,7 @@ export class DashboardComponent implements OnInit {
   // ]
 
 
-  constructor(private location: Location,private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
+  constructor(private http: HttpClient,private location: Location,private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog,private dashboardservice:DashboardService) { }
 
   ngOnInit() {
     this.getUserId();
@@ -148,7 +149,11 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  openUploadDialog(): void {
+  openUploadDialog() {
+
+    this.value = 0;
+    this.loadingMsg="";
+
     const dialogRef = this.dialog.open(UploadDialogComponent ,{
       width:'650px'
     })
@@ -158,20 +163,63 @@ export class DashboardComponent implements OnInit {
       if(result!=null)
       {
 
-        console.log(result);
+        // console.log(result);
+        //
+        // this.fileUploadObj = {
+        //   file:result,
+        //   path:this.currentPath
+        // }
+        //
+        // this.dashboardservice.postFile(result);
+                             // .subscribe((event:any)=>{
+                             //      console.log('<-------->',event);
+                             //      this.getFileData();
+                             //   // console.log('--------->',result);
+                             //   // this.contentObj = result.fileData;
+                             // });
 
-        this.fileUploadObj = {
-          file:result,
-          path:this.currentPath
-        }
 
-        this.dashboardservice.postFile(result)
-                             .subscribe((event:any)=>{
-                                  console.log('<-------->',event);
-                                  this.getFileData();
-                               // console.log('--------->',result);
-                               // this.contentObj = result.fileData;
-                             });
+        // ------------------
+        const formData: FormData = new FormData();
+        formData.append('myfile', result,result.name);
+        var options = { content: formData };
+        // return this.http.post('http://localhost:3000/file/uploadFile', formData,{
+        //     reportProgress: true,
+        //   });
+
+          const req = new HttpRequest('POST', 'http://localhost:3000/file/uploadFile', formData,{
+          reportProgress: true
+        });
+
+        this.http.request(req).subscribe((event: HttpEvent<any>) => {
+
+          // const percentDone = Math.round(100 * event.loaded / event.total);
+          // console.log(`File is ${percentDone}% uploaded.`);
+
+          switch (event.type) {
+            case HttpEventType.Sent:
+              this.value=25;
+              this.loadingMsg="file uploading is in progress ...";
+              console.log('Request sent!',this.value);
+              break;
+            case HttpEventType.ResponseHeader:
+              this.value=75;
+              console.log('Response header received!',this.value);
+              break;
+            case HttpEventType.DownloadProgress:
+              this.value=100;
+              console.log('event loaded--->', event.loaded);
+              console.log('event loaded--->', event.loaded);
+              const percentDone = Math.round(100 * event.loaded / event.total);
+              console.log(`File is ${percentDone}% uploaded.`);
+              break;
+            case HttpEventType.Response:
+              this.value=100;
+              this.loadingMsg="File uploaded successfully ..."
+              console.log('😺 Done!',this.value);
+              this.getFileData();
+          }
+        });
       }
 
     });

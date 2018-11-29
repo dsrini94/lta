@@ -3,10 +3,8 @@ var router = express.Router();
 var fs = require("fs");
 path = require('path');
 var multer  = require('multer');
-//var upload = multer({ dest: 'uploads/' });
 var userIdGlobal = "";
 var GlobalFolderpath=__dirname+"/../Users";
-//multer  = require('multer');
 
 
 router.post('/createFile', function(req, res, next) {
@@ -287,71 +285,142 @@ router.post('/getFiles', function(req, res, next){
     //var UserFolder=UserFolder1+"Users/"+req.body.userId;
     //console.log(UserFolder);
 
-    var fileDetails=[];
+    var fileDetails = [];
+    console.log("inside createfile route");
+    console.log(__dirname);
     var UserFolder1=(__dirname+'/../');
+    console.log(UserFolder1);
     var UserFolder=UserFolder1+"Users/"+req.body.userId;
     userIdGlobal = req.body.userId;
-console.log('---------->',userIdGlobal);
+    console.log('---------->',UserFolder);
 
-
-    var Folderpath=UserFolder;
-    //GlobalFolderpath=Folderpath;
-
-    //console.log('GlobalFolderpath====>',GlobalFolderpath);
-
-    //upload=multer({ dest: Folderpath });
-//console.log("Folderpath-->",Folderpath);
-    fs.readdir(Folderpath, function(err, items) {
-        //console.log("items:", items);
-        if(items!=undefined && items.length>0 && items!=null){
-        for (var i=0; i<items.length; i++) {
-            var file = Folderpath +'/' + items[i];
-           fs.stat(file, generate_callback(file, i, items.length));
-          // console.log(' Outside Filedetails: ', fileDetails);
-        }
-        function generate_callback(file, index, folderCount) {
-            return function(err, stats) {
-                //console.log("stats",stats);
-                if('size' in stats){
-                    console.log('Size in stats exists')
-                }
+    fs.access(UserFolder, function(err) {
+        if (err && err.code === 'ENOENT') {
+            console.log("creating user folder");
+            fs.mkdir(UserFolder,function(err)
+            {
+                if(err)
+                console.log("error in creating directory");
                 else{
-                    console.log('Size in stats does not exists')
+                    console.log(UserFolder);
+                console.log("directory is successfully created");
+                fs.access(UserFolder, fs.constants.F_OK, (err) => {
+                    console.log(`${UserFolder} ${err ? 'does not exist' : 'exists'}`);
+                  });
+                  var Folderpath=UserFolder;
+                  fs.readdir(Folderpath, function(err, items) {
+                      //console.log("items:", items);
+                      if(items!=undefined && items.length>0 && items!=null){
+                      for (var i=0; i<items.length; i++) {
+                          var file = Folderpath +'/' + items[i];
+                         fs.stat(file, generate_callback(file, i, items.length));
+                        // console.log(' Outside Filedetails: ', fileDetails);
+                      }
+                      function generate_callback(file, index, folderCount) {
+                          return function(err, stats) {
+                              //console.log("stats",stats);
+                              if('size' in stats){
+                                  console.log('Size in stats exists')
+                              }
+                              else{
+                                  console.log('Size in stats does not exists')
+                              }
+                              var time=stats["mtime"];
+                              time = JSON.stringify(time).toString().split('T');
+                              time = time[0].substr(1);
+                              var nameFile=file.split('/');
+                              var namelength=nameFile.length;
+                             var types= stats.isDirectory();
+                             var ftype;
+                             if(types==true)
+                                  ftype="folder";
+                              else
+                                  ftype="file";
+                                    var tempItemObj={
+                                        file:file,
+                                        name: nameFile[namelength-1],
+                                        size:stats["size"],
+                                        mtime:time,
+                                        type:ftype
+                                  };
+                                  fileDetails.push(tempItemObj);
+                          //        console.log('Index: ', index);
+                            //      console.log('Folder Count', folderCount)
+              
+                                  if(index+1 == folderCount){
+                              //        console.log('Reached end of the list',i)
+                                //      console.log('Inside: ', fileDetails);
+                                      res.json({fileData:fileDetails});
+                                  }
+                              }
+                      };
+                  }
+                  else
+                  {
+                      res.json(null);
+                  }
+                  });
                 }
-                var time=stats["mtime"];
-                time = JSON.stringify(time).toString().split('T');
-                time = time[0].substr(1);
-                var nameFile=file.split('/');
-                var namelength=nameFile.length;
-               var types= stats.isDirectory();
-               var ftype;
-               if(types==true)
-                    ftype="folder";
-                else
-                    ftype="file";
-                      var tempItemObj={
-                          file:file,
-                          name: nameFile[namelength-1],
-                          size:stats["size"],
-                          mtime:time,
-                          type:ftype
-                    };
-                    fileDetails.push(tempItemObj);
-            //        console.log('Index: ', index);
-              //      console.log('Folder Count', folderCount)
+            });
+        }
+        else
+        {
+            var Folderpath=UserFolder;
+            fs.readdir(Folderpath, function(err, items) {
+                //console.log("items:", items);
+                if(items!=undefined && items.length>0 && items!=null){
+                for (var i=0; i<items.length; i++) {
+                    var file = Folderpath +'/' + items[i];
+                   fs.stat(file, generate_callback(file, i, items.length));
+                  // console.log(' Outside Filedetails: ', fileDetails);
+                }
+                function generate_callback(file, index, folderCount) {
+                    return function(err, stats) {
+                        //console.log("stats",stats);
+                        if('size' in stats){
+                            console.log('Size in stats exists')
+                        }
+                        else{
+                            console.log('Size in stats does not exists')
+                        }
+                        var time=stats["mtime"];
+                        time = JSON.stringify(time).toString().split('T');
+                        time = time[0].substr(1);
+                        var nameFile=file.split('/');
+                        var namelength=nameFile.length;
+                       var types= stats.isDirectory();
+                       var ftype;
+                       if(types==true)
+                            ftype="folder";
+                        else
+                            ftype="file";
+                              var tempItemObj={
+                                  file:file,
+                                  name: nameFile[namelength-1],
+                                  size:stats["size"],
+                                  mtime:time,
+                                  type:ftype
+                            };
+                            fileDetails.push(tempItemObj);
+                    //        console.log('Index: ', index);
+                      //      console.log('Folder Count', folderCount)
+        
+                            if(index+1 == folderCount){
+                        //        console.log('Reached end of the list',i)
+                          //      console.log('Inside: ', fileDetails);
+                                res.json({fileData:fileDetails});
+                            }
+                        }
+                };
+            }
+            else
+            {
+                res.json(null);
+            }
+            });
+        }
 
-                    if(index+1 == folderCount){
-                //        console.log('Reached end of the list',i)
-                  //      console.log('Inside: ', fileDetails);
-                        res.json({fileData:fileDetails});
-                    }
-                }
-        };
-    }
-    else
-    {
-        res.json(null);
-    }
+
     });
 });
 

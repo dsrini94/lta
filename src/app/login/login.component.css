@@ -43,11 +43,11 @@
   margin: auto;
   width:50%;
   height:50%;
-  margin-top: 60px;
+  margin-top: 80px;
 }
 
 .formContainer {
-  margin: 5px;
+  margin-top: 50px;
 }
 
 .formContainer input[type="text"],.formContainer input[type="password"]{

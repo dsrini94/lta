@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -23,7 +24,8 @@ import {
         MatInputModule,
         MatListModule,
         MatRadioModule,
-        MatTableModule } from '@angular/material';
+        MatTableModule,
+        MatProgressBarModule } from '@angular/material';
 
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -55,6 +57,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatListModule,
     MatRadioModule,
     MatTableModule,
+    MatProgressBarModule
   ],
   entryComponents: [
     FileDialogComponent,

@@ -1,6 +1,6 @@
 <div class="appbarComponent">
   <img src="./../../assets/LTA.png" />
-  <p class="branding">Drive</p>
+  <p class="branding">TeamSpace</p>
   <p class="greetings" >Hello {{userId | uppercase }}</p>
   <mat-icon (click)="handleLogout()">exit_to_app</mat-icon>
 </div>
@@ -68,6 +68,16 @@
       <span>Delete</span>
     </button>
   </div>
+</div>
+
+<div class="loaderContainer">
+  <mat-progress-bar
+          class="example-margin"
+          [color]="color"
+          [mode]="mode"
+          [value]="value">
+      </mat-progress-bar>
+      <p class="loadingMsg">{{loadingMsg | uppercase}}</p>
 </div>
 
 <div class="emptyFillComponent" *ngIf="empty">

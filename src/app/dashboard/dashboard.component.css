@@ -113,7 +113,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 10vw 10.5vw 15vw 15vw 15vw 20vw;
+  grid-template-columns: 10vw 10.5vw 18vw 15vw 15vw 20vw;
   background-color: #d5dae8;
   padding:10px;
   margin:10px 0px;
@@ -142,7 +142,7 @@
 
 .tableRows {
   display: grid;
-  grid-template-columns: 10.5vw 10vw 15vw 15vw 15vw 20vw;
+  grid-template-columns: 10.5vw 10vw 18vw 15vw 15vw 20vw;
   padding:5px;
 }
 
@@ -160,4 +160,15 @@
 
 .tableRows:hover {
   background-color:#e8e8e8;
+}
+
+.loadingMsg {
+  display: block;
+  color:#163f7f;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.loaderContainer{
+  width:100%;
 }
