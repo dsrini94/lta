@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
 
   openDialog(type): void {
     this.type = type;
-
+    this.loadingMsg="";
     const dialogRef = this.dialog.open(FileDialogComponent, {
       width:'350px',
       data:{
@@ -237,7 +237,8 @@ export class DashboardComponent implements OnInit {
   }
 
   handleDeleteFile():void {
-
+    this.loadingMsg="";
+    
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
                            if(response!=null)
@@ -257,6 +258,8 @@ export class DashboardComponent implements OnInit {
   }
 
   handleSelect(selectedObj: FileObj):void {
+    this.loadingMsg="";
+    
     this.selectedObj = selectedObj;
   }
 

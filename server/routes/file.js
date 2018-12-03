@@ -9,12 +9,8 @@ var GlobalFolderpath=__dirname+"/../Users";
 
 router.post('/createFile', function(req, res, next) {
     var fileDetails = [];
-    //console.log("inside createfile route");
-    //console.log(__dirname);
     var UserFolder1=(__dirname+'/../');
-    //console.log(UserFolder1);
     var UserFolder=UserFolder1+"Users/"+req.body.userId;
-    //console.log(UserFolder);
     fs.access(UserFolder, function(err) {
         if (err && err.code === 'ENOENT') {
             console.log("creating user folder");
@@ -30,7 +26,6 @@ router.post('/createFile', function(req, res, next) {
                   });
                   let filename = req.body.name;
                   var Folderpath=UserFolder+"/";
-                  //var Folderpath=UserFolder;
                   var path=Folderpath+filename;
                   if(req.body.type=="folder"){
                 fs.mkdir(path,function(err)
@@ -45,7 +40,6 @@ router.post('/createFile', function(req, res, next) {
                   else
                   {
                       var filecontent=" ";
-                      //console.log(req.body.type);
                       path=path+".txt";
                     fs.writeFile(path,filecontent, (err) => {
                         if(err)
@@ -62,7 +56,6 @@ router.post('/createFile', function(req, res, next) {
                       for (var i=0; i<items.length; i++) {
                           var file = Folderpath +  items[i];
                          fs.stat(file, generate_callback(file, i, items.length));
-                         //console.log(' Outside Filedetails: ', fileDetails);
                       }
                       function generate_callback(file, index, folderCount) {
                           return function(err, stats) {
@@ -85,13 +78,8 @@ router.post('/createFile', function(req, res, next) {
                                       type:ftype
                                   };
                                   fileDetails.push(tempItemObj);
-                                //  console.log(tempItemObj.mtime);
-                                //  console.log('Index: ', index);
-                                  //console.log('Folder Count', folderCount)
 
                                   if(index+1 == folderCount){
-                                    //  console.log('Reached end of the list',i)
-                                      //console.log('Inside:', fileDetails);
                                       res.json({fileData:fileDetails});
                                   }
                               }
@@ -158,7 +146,6 @@ router.post('/createFile', function(req, res, next) {
                       for (var i=0; i<items.length; i++) {
                           var file = Folderpath  + items[i];
                          fs.stat(file, generate_callback(file, i, items.length));
-                         //console.log(' Outside Filedetails: ', fileDetails);
                       }
                       function generate_callback(file, index, folderCount) {
                           return function(err, stats) {
@@ -180,13 +167,9 @@ router.post('/createFile', function(req, res, next) {
                                       mtime:time,
                                       type:ftype
                                   };
-                                  fileDetails.push(tempItemObj);7
-                                  //console.log('Index: ', index);
-                                  //console.log('Folder Count', folderCount)
+                                  fileDetails.push(tempItemObj);
 
                                   if(index+1 == folderCount){
-                                      //console.log('Reached end of the list',i)
-                                      //console.log('Inside: ', fileDetails);
                                       res.json({fileData:fileDetails});
                                   }
                               }
@@ -211,8 +194,6 @@ router.post('/deleteFile', function(req, res, next) {
     var filename=req.body.name;
     var filelength=filename.length;
     var newpath=path.substr(0,(pathLength-filelength-1));
-    //console.log("path:",path);
-    //console.log("path length",pathLength,"file length",filelength,"path without file",newpath);
     var newpath1=newpath+"/"+filename;
     rimraf(newpath1,function(err){
         if(err){
@@ -221,13 +202,11 @@ router.post('/deleteFile', function(req, res, next) {
         else{
         console.log('done');
         var Folderpath=newpath;
-        //console.log(Folderpath);
         fs.readdir(Folderpath, function(err, items) {
             if(items.length>0){
             for (var i=0; i<items.length; i++) {
                 var file = Folderpath+'/'  + items[i];
                fs.stat(file, generate_callback(file, i, items.length));
-               //console.log(' Outside Filedetails: ', fileDetails);
             }
             function generate_callback(file, index, folderCount) {
                 return function(err, stats) {
@@ -256,12 +235,8 @@ router.post('/deleteFile', function(req, res, next) {
                               type:ftype
                         };
                         fileDetails.push(tempItemObj);
-                        //console.log('Index: ', index);
-                        //console.log('Folder Count', folderCount)
 
                         if(index+1 == folderCount){
-                          //  console.log('Reached end of the list',i)
-                            //console.log('Inside: ', fileDetails);
                             res.json({fileData:fileDetails});
                         }
                     }
@@ -278,12 +253,6 @@ router.post('/deleteFile', function(req, res, next) {
 });
 
 router.post('/getFiles', function(req, res, next){
-   // console.log("req body:",req);
-    //console.log("UserId:",req.body.userId);
-    //var UserFolder1=(__dirname+'/../');
-    //console.log(UserFolder1);
-    //var UserFolder=UserFolder1+"Users/"+req.body.userId;
-    //console.log(UserFolder);
 
     var fileDetails = [];
     console.log("inside createfile route");
@@ -309,16 +278,13 @@ router.post('/getFiles', function(req, res, next){
                   });
                   var Folderpath=UserFolder;
                   fs.readdir(Folderpath, function(err, items) {
-                      //console.log("items:", items);
                       if(items!=undefined && items.length>0 && items!=null){
                       for (var i=0; i<items.length; i++) {
                           var file = Folderpath +'/' + items[i];
                          fs.stat(file, generate_callback(file, i, items.length));
-                        // console.log(' Outside Filedetails: ', fileDetails);
                       }
                       function generate_callback(file, index, folderCount) {
                           return function(err, stats) {
-                              //console.log("stats",stats);
                               if('size' in stats){
                                   console.log('Size in stats exists')
                               }
@@ -344,12 +310,8 @@ router.post('/getFiles', function(req, res, next){
                                         type:ftype
                                   };
                                   fileDetails.push(tempItemObj);
-                          //        console.log('Index: ', index);
-                            //      console.log('Folder Count', folderCount)
               
                                   if(index+1 == folderCount){
-                              //        console.log('Reached end of the list',i)
-                                //      console.log('Inside: ', fileDetails);
                                       res.json({fileData:fileDetails});
                                   }
                               }
@@ -367,16 +329,13 @@ router.post('/getFiles', function(req, res, next){
         {
             var Folderpath=UserFolder;
             fs.readdir(Folderpath, function(err, items) {
-                //console.log("items:", items);
                 if(items!=undefined && items.length>0 && items!=null){
                 for (var i=0; i<items.length; i++) {
                     var file = Folderpath +'/' + items[i];
                    fs.stat(file, generate_callback(file, i, items.length));
-                  // console.log(' Outside Filedetails: ', fileDetails);
                 }
                 function generate_callback(file, index, folderCount) {
                     return function(err, stats) {
-                        //console.log("stats",stats);
                         if('size' in stats){
                             console.log('Size in stats exists')
                         }
@@ -402,12 +361,8 @@ router.post('/getFiles', function(req, res, next){
                                   type:ftype
                             };
                             fileDetails.push(tempItemObj);
-                    //        console.log('Index: ', index);
-                      //      console.log('Folder Count', folderCount)
         
                             if(index+1 == folderCount){
-                        //        console.log('Reached end of the list',i)
-                          //      console.log('Inside: ', fileDetails);
                                 res.json({fileData:fileDetails});
                             }
                         }
@@ -428,7 +383,6 @@ router.post('/getFiles', function(req, res, next){
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
       console.log("dirname",__dirname);
-      //GlobalFolderpath=__dirname+"/../Users/"+userIdGlobal;
         callback(null,__dirname+"/../Users/"+userIdGlobal);
     },
     filename: function(req, file, callback) {
@@ -453,7 +407,6 @@ var Storage = multer.diskStorage({
     });
     var Folderpath=GlobalFolderpath+"/"+userIdGlobal;
     console.log("Folder--->",GlobalFolderpath);
-    //console.log("Folder--->",Folderpath);
 
     fs.readdir(Folderpath, function(err, items) {
       console.log("items==",items);
@@ -461,7 +414,6 @@ var Storage = multer.diskStorage({
         for (var i=0; i<items.length; i++) {
             var file = Folderpath+'/'  + items[i];
            fs.stat(file, generate_callback(file, i, items.length));
-           //console.log(' Outside Filedetails: ', fileDetails);
         }
         function generate_callback(file, index, folderCount) {
             return function(err, stats) {
@@ -490,12 +442,8 @@ var Storage = multer.diskStorage({
                           type:ftype
                     };
                     fileDetails.push(tempItemObj);
-                    //console.log('Index: ', index);
-                    //console.log('Folder Count', folderCount)
 
                     if(index+1 == folderCount){
-                      //  console.log('Reached end of the list',i)
-                        //console.log('Inside: ', fileDetails);
                         res.json({fileData:fileDetails});
                     }
                 }
@@ -506,23 +454,6 @@ var Storage = multer.diskStorage({
         res.json(null);
     }
     });
-
-    //res.send('Work under progress');
   })
 
-  // router.post('/uploadFile',function(req, res, next){
-  //     console.log('------------------------')
-  //     console.log(userIdGlobal);
-  //     console.log(req.file);
-  //     // upload(req,res,function(err) {
-  //     //         if(err) {
-  //     //           console.log('Error uploading', err);
-  //     //         }
-  //     //         else{
-  //     //           console.log('Uploaded Successfully');
-  //     //   }
-  //     // });
-  //     console.log('------------------------')
-  //
-  // });
 module.exports = router;
