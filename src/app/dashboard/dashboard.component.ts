@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
     this.loadingMsg="";
 
     const dialogRef = this.dialog.open(UploadDialogComponent ,{
-      width:'650px'
+      width:'750px'
     })
 
     dialogRef.afterClosed().subscribe(result => {

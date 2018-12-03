@@ -34,3 +34,20 @@ h4 {
   top: 0;
   opacity: 0;
 }
+
+.uploadContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.fileName {
+  color:#163f7f;
+  font-size: 18px;
+  font-weight: 500;
+  margin:10px;
+}
+.fileNameKey {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px;
+}
