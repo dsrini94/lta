@@ -21,35 +21,12 @@ export class DashboardService {
     return this.http.post('http://localhost:3000/file/deleteFile',selectedObj);
   }
 
-  postFile(fileToUpload) {
-    const formData: FormData = new FormData();
-    formData.append('myfile', fileToUpload,fileToUpload.name);
-    var options = { content: formData };
-    // return this.http.post('http://localhost:3000/file/uploadFile', formData,{
-    //     reportProgress: true,
-    //   });
+  fetchSelectedFolderContents(selectedFolder) {
+    return this.http.post('http://localhost:3000/file/selectedFolder',selectedFolder);
+  }
 
-      const req = new HttpRequest('POST', 'http://localhost:3000/file/uploadFile', formData,{
-      reportProgress: true
-    });
-
-    this.http.request(req).subscribe((event: HttpEvent<any>) => {
-      switch (event.type) {
-        case HttpEventType.Sent:
-          console.log('Request sent!');
-          break;
-        case HttpEventType.ResponseHeader:
-          console.log('Response header received!');
-          break;
-        case HttpEventType.DownloadProgress:
-          const kbLoaded = Math.round(event.loaded / 1024);
-          console.log(`Download in progress! ${ kbLoaded }Kb loaded`);
-          break;
-        case HttpEventType.Response:
-          console.log('😺 Done!', event.body);
-      }
-    });
-
+  fetchFolderOneLevelUpContents(currentPath){
+    return this.http.post('http://localhost:3000/file/handleBack',currentPath);
   }
 
 

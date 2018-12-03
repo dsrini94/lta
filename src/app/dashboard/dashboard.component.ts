@@ -59,7 +59,8 @@ export class DashboardComponent implements OnInit {
   color = 'primary';
   mode = 'determinate';
   value = 0;
-  loadingMsg:string = ""
+  loadingMsg:string = "";
+  backButtonDisable: boolean = true;
 
   // [
   //   {
@@ -118,7 +119,7 @@ export class DashboardComponent implements OnInit {
 
   openDialog(type): void {
     this.type = type;
-
+    this.loadingMsg="";
     const dialogRef = this.dialog.open(FileDialogComponent, {
       width:'350px',
       data:{
@@ -163,38 +164,15 @@ export class DashboardComponent implements OnInit {
       if(result!=null)
       {
 
-        // console.log(result);
-        //
-        // this.fileUploadObj = {
-        //   file:result,
-        //   path:this.currentPath
-        // }
-        //
-        // this.dashboardservice.postFile(result);
-                             // .subscribe((event:any)=>{
-                             //      console.log('<-------->',event);
-                             //      this.getFileData();
-                             //   // console.log('--------->',result);
-                             //   // this.contentObj = result.fileData;
-                             // });
-
-
-        // ------------------
         const formData: FormData = new FormData();
         formData.append('myfile', result,result.name);
         var options = { content: formData };
-        // return this.http.post('http://localhost:3000/file/uploadFile', formData,{
-        //     reportProgress: true,
-        //   });
 
           const req = new HttpRequest('POST', 'http://localhost:3000/file/uploadFile', formData,{
           reportProgress: true
         });
 
         this.http.request(req).subscribe((event: HttpEvent<any>) => {
-
-          // const percentDone = Math.round(100 * event.loaded / event.total);
-          // console.log(`File is ${percentDone}% uploaded.`);
 
           switch (event.type) {
             case HttpEventType.Sent:
@@ -237,6 +215,7 @@ export class DashboardComponent implements OnInit {
   }
 
   handleDeleteFile():void {
+    this.loadingMsg="";
 
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
@@ -253,14 +232,35 @@ export class DashboardComponent implements OnInit {
   }
 
   handleLogout(): void {
+    this.loadingMsg="";
     this.location.back();
   }
 
   handleSelect(selectedObj: FileObj):void {
+    this.loadingMsg="";
     this.selectedObj = selectedObj;
   }
 
-  selectFolder(selectedFolder: FileObj):void {
-    console.log(selectedFolder);
+  selectedFolder(selectedFolder):void {
+      this.dashboardservice.fetchSelectedFolderContents(selectedFolder)
+                           .subscribe((response:any) => {
+                                if(!response)
+                                  {
+                                    this.contentObj = response.fileData;
+                                    this.backButtonDisable = false;
+                                  }
+                           });
   }
+
+  handleBackButton():void {
+    this.dashboardservice.fetchFolderOneLevelUpContents(this.currentPath)
+                         .subscribe((response:any) => {
+                              if(!response)
+                                {
+                                  this.contentObj = response.fileData;
+                                  this.backButtonDisable = false;
+                                }
+                         });
+  }
+
 }
