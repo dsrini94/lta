@@ -346,7 +346,7 @@ router.post('/getFiles', function(req, res, next){
                                   fileDetails.push(tempItemObj);
                           //        console.log('Index: ', index);
                             //      console.log('Folder Count', folderCount)
-              
+
                                   if(index+1 == folderCount){
                               //        console.log('Reached end of the list',i)
                                 //      console.log('Inside: ', fileDetails);
@@ -404,7 +404,7 @@ router.post('/getFiles', function(req, res, next){
                             fileDetails.push(tempItemObj);
                     //        console.log('Index: ', index);
                       //      console.log('Folder Count', folderCount)
-        
+
                             if(index+1 == folderCount){
                         //        console.log('Reached end of the list',i)
                           //      console.log('Inside: ', fileDetails);

@@ -14,6 +14,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 
 import { DashboardService } from './dashboard.service';
 
+
+
 import {
         MatMenuModule,
         MatDialogModule,
@@ -56,7 +58,7 @@ import { FileDropModule } from 'ngx-file-drop';
     MatRadioModule,
     MatTableModule,
     MatProgressBarModule,
-    FileDropModule
+    FileDropModule,
   ],
   entryComponents: [
     FileDialogComponent,
