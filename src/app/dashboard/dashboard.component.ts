@@ -16,6 +16,7 @@ export interface UserObj {
   userId: string,
   type: string,
   name: string,
+  path: string,
 };
 
 export interface FileObj {
@@ -133,7 +134,8 @@ export class DashboardComponent implements OnInit {
         this.userObj = {
           userId: this.userId,
           name: result,
-          type: this.type
+          type: this.type,
+          path:this.currentPath
         };
 
         this.dashboardservice.createFile(this.userObj)
@@ -142,6 +144,7 @@ export class DashboardComponent implements OnInit {
                                {
                                  this.empty = false;
                                  this.currentPath = response.fileData[0].file;
+                                 console.log("inside create file",this.currentPath);
                                  this.contentObj = response.fileData;
                                }
                              });
@@ -243,12 +246,16 @@ export class DashboardComponent implements OnInit {
   selectedFolder(selectedFolder):void {
       this.dashboardservice.fetchSelectedFolderContents(selectedFolder)
                            .subscribe((response:any) => {
-                                if(response!=null)
+
+                                if(typeof response != "string")
                                   {
                                     this.contentObj = response.fileData;
                                     this.backButtonDisable = false;
                                   }
                                   else{
+                                    // this.currentPath = this.currentPath + '/' + response;
+                                    console.log('------>',this.currentPath);
+                                    this.contentObj = [];
                                     //console.log("selected folder--->",selectedFolder[name]);
                                     //this.router.navigate(['/dashboard/'+this.userId,this.selectedFolder]);
                                     // this.empty = true;
