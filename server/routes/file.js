@@ -38,7 +38,6 @@ function readFiles(Folderpath,res)
                                  fileDetails.push(tempItemObj);
 
                                  if(index+1 == folderCount){
-                                     console.log({fileData:fileDetails});
                                      res.json({fileData:fileDetails});
                                  }
                              }
@@ -52,8 +51,55 @@ function readFiles(Folderpath,res)
    
 }
 
+function readSelected(Folderpath,callback){
+    var fileDetails = [];
+    fs.readdir(Folderpath, function(err, items) {
+                    if(items!=undefined && items.length>0 && items!=null){
+                      for (var i=0; i<items.length; i++) {
+                          var file = Folderpath  +"/"+ items[i];
+                         fs.stat(file, generate_callback(file, i, items.length));
+                      }
+                      function generate_callback(file, index, folderCount) {
+                          return function(err, stats) {
+                            var time=stats["mtime"];
+                            time = JSON.stringify(time).toString().split('T');
+                            time = time[0].substr(1);
+                            var nameFile=file.split('/');
+                            var namelength=nameFile.length;
+                           var types= stats.isDirectory();
+                           var ftype;
+                           if(types==true)
+                                ftype="folder";
+                            else
+                                ftype="file";
+                                  var tempItemObj={
+                                      file:file,
+                                      name: nameFile[namelength-1],
+                                      size:stats["size"],
+                                      mtime:time,
+                                      type:ftype
+                                  };
+                                  fileDetails.push(tempItemObj);
+ 
+                                  if(index+1 == folderCount){
+                                      callback(null,{fileData:fileDetails},null);
+                                  }
+                              }
+                      };
+                    }
+                    else {
+                        console.log("folderpath selected",Folderpath);
+                        var nameFile=Folderpath.split('/');
+                        var namelength=nameFile.length;
+                        var currentFile=nameFile[namelength-1];
+                        console.log("name::",currentFile);
+                        callback(null,null,currentFile);
+                    }
+ 
+          }); 
+}
+
 router.post('/createFile', function(req, res, next) {
-    //var fileDetails = [];
     var UserFolder1=(__dirname+'/../');
     var UserFolder=UserFolder1+"Users/"+req.body.userId;
     var filename = req.body.name;
@@ -127,8 +173,6 @@ router.post('/deleteFile', function(req, res, next) {
 });
 
 router.post('/getFiles', function(req, res, next){
-
-    //var fileDetails = [];
     var UserFolder1=(__dirname+'/../');
     var UserFolder=UserFolder1+"Users/"+req.body.userId;
     userIdGlobal = req.body.userId;
@@ -171,7 +215,6 @@ var Storage = multer.diskStorage({
   var upload = multer({ storage: Storage }).array("myfile", 1);
 
   router.post('/uploadFile', function(req, res) {
-    //var fileDetails=[];
     console.log('Upload route called');
     console.log(req.query);
     upload(req,res,function(err) {
@@ -191,7 +234,15 @@ var Storage = multer.diskStorage({
   router.post('/selectedFolder', function(req, res) {
       var Folderpath=req.body.file;
       console.log("inside selected folder",Folderpath);
-      readFiles(Folderpath,res);
+       readSelected(Folderpath,(err,response,currentfolder)=>{
+            if(response == null)
+                res.json(currentfolder);
+            else{
+                console.log("inside new function",response);
+               res.json(response);
+            }
+       })
+
   });
 
 module.exports = router;
