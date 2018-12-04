@@ -216,7 +216,6 @@ export class DashboardComponent implements OnInit {
 
   handleDeleteFile():void {
     this.loadingMsg="";
-
     this.dashboardservice.deleteFile(this.selectedObj)
                          .subscribe((response:any) => {
                            if(response!=null)
@@ -244,10 +243,15 @@ export class DashboardComponent implements OnInit {
   selectedFolder(selectedFolder):void {
       this.dashboardservice.fetchSelectedFolderContents(selectedFolder)
                            .subscribe((response:any) => {
-                                if(!response)
+                                if(response!=null)
                                   {
                                     this.contentObj = response.fileData;
                                     this.backButtonDisable = false;
+                                  }
+                                  else{
+                                    //console.log("selected folder--->",selectedFolder[name]);
+                                    //this.router.navigate(['/dashboard/'+this.userId,this.selectedFolder]);
+                                    // this.empty = true;
                                   }
                            });
   }

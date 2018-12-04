@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpRequest, HttpEvent ,HttpEventType, HttpResponse } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +29,5 @@ export class DashboardService {
   fetchFolderOneLevelUpContents(currentPath){
     return this.http.post('http://localhost:3000/file/handleBack',currentPath);
   }
-
 
 }
