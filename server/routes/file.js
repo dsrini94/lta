@@ -5,6 +5,7 @@ path = require('path');
 var multer  = require('multer');
 var userIdGlobal = "";
 var GlobalFolderpath=__dirname+"/../Users";
+var GlobalSelectedpath;
 
 function readFiles(Folderpath,res)
 {
@@ -38,12 +39,14 @@ function readFiles(Folderpath,res)
                                  fileDetails.push(tempItemObj);
 
                                  if(index+1 == folderCount){
+                                  // console.log("files",{fileData:fileDetails});
                                      res.json({fileData:fileDetails});
                                  }
                              }
                      };
                    }
                    else {
+                    // console.log("no file");
                        res.json(null);
                    }
 
@@ -88,11 +91,11 @@ function readSelected(Folderpath,callback){
                       };
                     }
                     else {
-                        console.log("folderpath selected",Folderpath);
+                        //console.log("folderpath selected",Folderpath);
                         var nameFile=Folderpath.split('/');
                         var namelength=nameFile.length;
                         var currentFile=nameFile[namelength-1];
-                        console.log("name::",currentFile);
+                        //console.log("name::",currentFile);
                         callback(null,null,currentFile);
                     }
 
@@ -100,12 +103,15 @@ function readSelected(Folderpath,callback){
 }
 
 router.post('/createFile', function(req, res, next) {
-    var UserFolder1=(__dirname+'/../');
-    var UserFolder=UserFolder1+"Users/"+req.body.userId;
+//  console.log("request:",req.body.path);
+    // var UserFolder1=(__dirname+'/../');
+    // var UserFolder=UserFolder1+"Users/"+req.body.userId;
     var filename = req.body.name;
-    var Folderpath=UserFolder;
+    //var Folderpath=UserFolder;
+    var Folderpath=req.body.path;
+  //  console.log("Folderpath",Folderpath,"filename",filename);
     var path=Folderpath+"/"+filename;
-    console.log("Folder path--->",Folderpath);
+    //console.log("Folder path--->",Folderpath);
     if(req.body.type=="folder"){
         fs.mkdir(path,function(err)
       {
@@ -173,10 +179,11 @@ router.post('/deleteFile', function(req, res, next) {
 });
 
 router.post('/getFiles', function(req, res, next){
+  //console.log(req.body);
     var UserFolder1=(__dirname+'/../');
     var UserFolder=UserFolder1+"Users/"+req.body.userId;
     userIdGlobal = req.body.userId;
-
+    GlobalSelectedpath=UserFolder;
     fs.access(UserFolder, function(err) {
         if (err && err.code === 'ENOENT') {
             console.log("creating user folder");
@@ -185,7 +192,7 @@ router.post('/getFiles', function(req, res, next){
                 if(err)
                 console.log("error in creating directory");
                 else{
-                    console.log(UserFolder);
+                    //console.log(UserFolder);
                 console.log("directory is successfully created");
                   var Folderpath=UserFolder;
                   readFiles(Folderpath,res);
@@ -203,8 +210,11 @@ router.post('/getFiles', function(req, res, next){
 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
-      console.log("dirname",__dirname);
-        callback(null,__dirname+"/../Users/"+userIdGlobal);
+      //console.log("body in multer",req.body);
+      //console.log("dirname",__dirname);
+      //console.log("GlobalSelectedpath",GlobalSelectedpath);
+        //callback(null,__dirname+"/../Users/"+userIdGlobal);
+        callback(null,GlobalSelectedpath);
     },
     filename: function(req, file, callback) {
         callback(null, file.originalname);
@@ -215,8 +225,9 @@ var Storage = multer.diskStorage({
   var upload = multer({ storage: Storage }).array("myfile", 1);
 
   router.post('/uploadFile', function(req, res) {
-    console.log('Upload route called');
-    console.log(req.query);
+    //console.log("checking-->",req.file);
+    //console.log('Upload route called');
+    //console.log(req.query);
     upload(req,res,function(err) {
         if(err) {
           console.log('Error uploading', err);
@@ -233,16 +244,37 @@ var Storage = multer.diskStorage({
 
   router.post('/selectedFolder', function(req, res) {
       var Folderpath=req.body.file;
-      console.log("inside selected folder",Folderpath);
+     console.log("inside selected folder",Folderpath);
+      GlobalSelectedpath=Folderpath;
        readSelected(Folderpath,(err,response,currentfolder)=>{
             if(response == null)
                 res.json(currentfolder);
             else{
-                console.log("inside new function",response);
+              //  console.log("inside new function",response);
                res.json(response);
             }
        })
 
   });
+router.post('/handleBack', function(req, res) {
+  console.log(req.body.userId);
+  var path=req.body.userId;
+  //var Folderpath=req.body.userId;
+  var nameFile=path.split('/');
+  var namelength=nameFile.length;
+  console.log("name length",namelength);
+  var filename=nameFile[namelength-1];
+  console.log("file name",filename);
+
+    //var path=req.body.file;
+    var pathLength=path.length;
+    //var filename=req.body.name;
+    var filelength=filename.length;
+    path=path.substr(0,(pathLength-filelength-1));
+    //var newpath1=newpath+"/"+filename;
+  console.log("newpath:",path);
+  readFiles(path,res);
+});
+
 
 module.exports = router;

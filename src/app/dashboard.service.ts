@@ -27,6 +27,7 @@ export class DashboardService {
   }
 
   fetchFolderOneLevelUpContents(currentPath){
+    console.log("current",currentPath);
     return this.http.post('http://localhost:3000/file/handleBack',currentPath);
   }
 
