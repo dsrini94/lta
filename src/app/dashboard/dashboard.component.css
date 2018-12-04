@@ -46,7 +46,7 @@
 .menubar {
   display: grid !important;
   padding:7px;
-  grid-template-columns: 80px 100px 100px 125px 130px ;
+  grid-template-columns: 160px 100px 100px 125px 130px ;
   background-color: #d5dae8;
 }
 

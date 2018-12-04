@@ -1,0 +1,71 @@
+<RibMessages 
+  xmlns="http://www.oracle.com/retail/integration/rib/RibMessages"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.oracle.com/retail/integration/rib/RibMessages http://iebaluvdapp014:7020/rib-func-artifact/integration/xsd/RibMessages.xsd" >
+  <ribMessage>
+    <family>ItemLoc</family>
+    <type>ItemLocCre</type>
+    <id>210018408</id>
+    <ribmessageID>ItemLoc_pub_1|2018.04.18 09:32:40.393|1490</ribmessageID>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>5000</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>935</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>955</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>6000</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>1975</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>963</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <routingInfo>
+      <name>to_phys_loc</name>
+      <value>343</value>
+      <detail>
+        <dtl_name>to_phys_loc_type</dtl_name>
+        <dtl_value>W</dtl_value>
+      </detail>
+    </routingInfo>
+    <publishTime>2018-04-18 09:32:40.393 IST</publishTime>
+  <messageData>&lt;ItemLocDesc xmlns=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;item&gt;210018408&lt;/item&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;5000&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;15000&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002787&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;935&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;10935&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002787&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;955&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;10955&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002786&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;6000&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;16000&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002786&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;1975&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;101975&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002781&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;963&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;10963&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002786&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;ns1:ItemLocPhys xmlns:ns1=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns1:physical_loc&gt;343&lt;/ns1:physical_loc&gt;&lt;ns1:loc_type&gt;W&lt;/ns1:loc_type&gt;&lt;ns2:ItemLocVirt xmlns:ns2=&quot;http://www.oracle.com/retail/integration/base/bo/ItemLocDesc/v1&quot; &gt;&lt;ns2:loc&gt;10343&lt;/ns2:loc&gt;&lt;ns2:loc_type&gt;W&lt;/ns2:loc_type&gt;&lt;ns2:local_item_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_item_desc&gt;&lt;ns2:local_short_desc&gt;991001767 - pk2 - LH 18_04 1 - Solid Colour (Ivory) / Multiple - ROI - IB - UK&lt;/ns2:local_short_desc&gt;&lt;ns2:status&gt;A&lt;/ns2:status&gt;&lt;ns2:primary_supp&gt;1000002781&lt;/ns2:primary_supp&gt;&lt;ns2:primary_cntry&gt;IN&lt;/ns2:primary_cntry&gt;&lt;ns2:receive_as_type&gt;P&lt;/ns2:receive_as_type&gt;&lt;ns2:taxable_ind&gt;Y&lt;/ns2:taxable_ind&gt;&lt;ns2:source_method&gt;S&lt;/ns2:source_method&gt;&lt;ns2:store_price_ind&gt;N&lt;/ns2:store_price_ind&gt;&lt;ns2:purchase_type&gt;N&lt;/ns2:purchase_type&gt;&lt;ns2:ext_uin_ind&gt;N&lt;/ns2:ext_uin_ind&gt;&lt;ns2:ranged_ind&gt;Y&lt;/ns2:ranged_ind&gt;&lt;/ns2:ItemLocVirt&gt;&lt;/ns1:ItemLocPhys&gt;&lt;/ItemLocDesc&gt;</messageData>
+    <customData></customData>
+    <customFlag>F</customFlag>
+  </ribMessage>
+</RibMessages>

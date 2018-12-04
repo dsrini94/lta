@@ -15,15 +15,30 @@
 
 <h4>Choose a File to Upload</h4>
 
-<div class="upload-btn-wrapper">
-  <button mat-raised-button class="menuButton" color="primary" class="btn">
-    <mat-icon>cloud_upload</mat-icon>
-    <span>Choose File</span>
-  </button>
-  <input type="file" name="myfile" (change)="handleFileInput($event.target.files)"/>
+<div class="uploadContainer">
 
-  <span>{{fileName}}</span>
+  <div class="upload-btn-wrapper">
+    <button mat-raised-button class="menuButton" color="primary" class="btn">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Choose File</span>
+    </button>
+    <input type="file" name="myfile" (change)="handleFileInput($event.target.files)"/>
+
+  </div>
+
+  <div>
+    <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)"
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+    </file-drop>
+  </div>
+
+  <div>
+    <span class="fileNameKey">File Chosen</span>
+    <span class="fileName">{{fileName}}</span>
+  </div>
 </div>
+
+
 
 <br/>
 <br/>
