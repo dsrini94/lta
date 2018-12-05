@@ -276,24 +276,25 @@ export class DashboardComponent implements OnInit {
     }
     this.dashboardservice.fetchFolderOneLevelUpContents(this.userIdObj)
                          .subscribe((response:any) => {
+                           if(response.fileData[0].root=="no"){
                                   this.contentObj = response.fileData;
                                   console.log("filedata",response.fileData);
-
-
                                   var path=response.fileData[0].file;
                                   var nameFile=path.split('/');
                                   var namelength=nameFile.length;
-                                  console.log("name length",namelength);
                                   var filename=nameFile[namelength-1];
-                                  console.log("file name",filename);
-                                    var pathLength=path.length;
-                                    var filelength=filename.length;
-                                    path=path.substr(0,(pathLength-filelength-1));
-
+                                  var pathLength=path.length;
+                                  var filelength=filename.length;
+                                  path=path.substr(0,(pathLength-filelength-1));
 
                                   this.currentPath = path;
                                   console.log('inside back handler',this.currentPath);
                                   this.backButtonDisable = false;
+                           }
+                           else{
+                            this.contentObj = response.fileData;
+                            this.backButtonDisable = true;
+                           }
                          });
   }
 

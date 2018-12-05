@@ -69,6 +69,13 @@ function readSelected(Folderpath,callback){
                             time = time[0].substr(1);
                             var nameFile=file.split('/');
                             var namelength=nameFile.length;
+                            var username=nameFile[namelength-2];
+                            var stop;
+                            if(username==userIdGlobal)
+                            stop="yes";
+                            else
+                            stop="no"
+                            //console.log("username",username,"global",userIdGlobal);
                            var types= stats.isDirectory();
                            var ftype;
                            if(types==true)
@@ -80,11 +87,13 @@ function readSelected(Folderpath,callback){
                                       name: nameFile[namelength-1],
                                       size:stats["size"],
                                       mtime:time,
-                                      type:ftype
+                                      type:ftype,
+                                      root:stop
                                   };
                                   fileDetails.push(tempItemObj);
 
                                   if(index+1 == folderCount){
+                                      console.log("inside selected folder-- all files",{fileData:fileDetails})
                                       callback(null,{fileData:fileDetails},null);
                                   }
                               }
@@ -124,7 +133,7 @@ router.post('/createFile', function(req, res, next) {
             if(response == null)
                 res.json(null);
             else{
-                console.log("inside old function",response);
+                //console.log("inside old function",response);
                res.json(response);
             }
        })
@@ -162,7 +171,7 @@ router.post('/createFile', function(req, res, next) {
                     if(response == null)
                         res.json(null);
                     else{
-                        console.log("inside old function",response);
+                        //console.log("inside old function",response);
                        res.json(response);
                     }
                })
@@ -193,7 +202,7 @@ router.post('/deleteFile', function(req, res, next) {
             if(response == null)
                 res.json(null);
             else{
-                console.log("inside old function",response);
+                //console.log("inside old function",response);
                res.json(response);
             }
        })
@@ -224,7 +233,7 @@ router.post('/getFiles', function(req, res, next){
                     if(response == null)
                         res.json(null);
                     else{
-                        console.log("inside old function",response);
+                        //console.log("inside old function",response);
                        res.json(response);
                     }
                })
@@ -276,7 +285,8 @@ var Storage = multer.diskStorage({
           console.log('Uploaded Successfully');
         }
     });
-    var Folderpath=GlobalFolderpath+"/"+userIdGlobal;
+    var Folderpath= GlobalSelectedpath;
+    //GlobalFolderpath+"/"+userIdGlobal;
     //console.log("Folder--->",GlobalFolderpath,"userid",userIdGlobal);
     //console.log("path",Folderpath);
     //readFiles(Folderpath,res);
@@ -306,22 +316,27 @@ var Storage = multer.diskStorage({
   });
 router.post('/handleBack', function(req, res) {
   console.log(req.body.userId);
+  var stop;
   var path=req.body.userId;
-  //var Folderpath=req.body.userId;
   var nameFile=path.split('/');
   var namelength=nameFile.length;
-  console.log("name length",namelength);
   var filename=nameFile[namelength-1];
-  console.log("file name",filename);
-
-    //var path=req.body.file;
-    var pathLength=path.length;
-    //var filename=req.body.name;
-    var filelength=filename.length;
-    path=path.substr(0,(pathLength-filelength-1));
-    //var newpath1=newpath+"/"+filename;
+  var username=nameFile[namelength-2];
+  var pathLength=path.length;
+  var filelength=filename.length;
+  path=path.substr(0,(pathLength-filelength-1));
   console.log("newpath:",path);
-  readFiles(path,res);
+  
+  readSelected(path,(err,response)=>{
+    if(response == null)
+        res.json(null);
+    else{
+        //console.log("inside old function",response);
+        //var backobj={response,"route":stop};
+        //console.log("back obj-->",backobj);
+       res.json(response);
+    }
+})
 });
 
 
