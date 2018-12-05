@@ -1,3 +1,6 @@
+ <div class="rightClickContainer" (click)="disableContextMenu()" oncontextmenu="return false;">
+    <ul> 
+        <li (contextmenu)="onrightClick($event)">
 <div class="appbarComponent">
   <img src="./../../assets/LTA.png" />
   <p class="branding">TeamSpace</p>
@@ -144,5 +147,15 @@
         <h4>{{content.size}} Bytes</h4>
       </div>
     </div>
+  </div>
+</div>
+
+<!--   <!-- this is the usage -->
+</li>
+   </ul>
+
+  <!--you have to write this only once in your component-->
+  <div *ngIf="contextmenu==true">
+      <app-contextmenu [x]="contextmenuX" [y]="contextmenuY"></app-contextmenu>
   </div>
 </div>

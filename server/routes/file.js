@@ -6,7 +6,7 @@ var multer  = require('multer');
 var userIdGlobal = "";
 var GlobalFolderpath=__dirname+"/../Users";
 
-function readFiles(Folderpath,res)
+function readFiles(Folderpath,callback)
 {
    var fileDetails = [];
    fs.readdir(Folderpath, function(err, items) {
@@ -38,13 +38,15 @@ function readFiles(Folderpath,res)
                                  fileDetails.push(tempItemObj);
 
                                  if(index+1 == folderCount){
-                                     res.json({fileData:fileDetails});
+                                     //res.json({fileData:fileDetails});
+                                     callback(null,{fileData:fileDetails});
                                  }
                              }
                      };
                    }
                    else {
-                       res.json(null);
+                       //res.json(null);
+                       callback(null,{fileData:fileDetails});
                    }
 
          });
@@ -113,7 +115,15 @@ router.post('/createFile', function(req, res, next) {
           console.log("error in creating directory");
           else{
           console.log("directory is successfully created");
-          readFiles(Folderpath,res);
+          //readFiles(Folderpath,res);
+          readFiles(Folderpath,(err,response)=>{
+            if(response == null)
+                res.json(null);
+            else{
+                console.log("inside old function",response);
+               res.json(response);
+            }
+       })
       }
       });
           }
@@ -143,7 +153,15 @@ router.post('/createFile', function(req, res, next) {
                 console.log("error in creating file");
                 else{
                 console.log("file is successfully created");
-                readFiles(Folderpath,res);
+                //readFiles(Folderpath,res);
+                readFiles(Folderpath,(err,response)=>{
+                    if(response == null)
+                        res.json(null);
+                    else{
+                        console.log("inside old function",response);
+                       res.json(response);
+                    }
+               })
                 }
             });
           }
@@ -166,7 +184,15 @@ router.post('/deleteFile', function(req, res, next) {
         else{
         console.log('done');
         var Folderpath=newpath;
-        readFiles(Folderpath,res);
+        //readFiles(Folderpath,res);
+        readFiles(Folderpath,(err,response)=>{
+            if(response == null)
+                res.json(null);
+            else{
+                console.log("inside old function",response);
+               res.json(response);
+            }
+       })
             }
     });
 
@@ -188,14 +214,30 @@ router.post('/getFiles', function(req, res, next){
                     console.log(UserFolder);
                 console.log("directory is successfully created");
                   var Folderpath=UserFolder;
-                  readFiles(Folderpath,res);
+                  //readFiles(Folderpath,res);
+                  readFiles(Folderpath,(err,response)=>{
+                    if(response == null)
+                        res.json(null);
+                    else{
+                        console.log("inside old function",response);
+                       res.json(response);
+                    }
+               })
                 }
             });
         }
         else
         {
             var Folderpath=UserFolder;
-            readFiles(Folderpath,res);
+            //readFiles(Folderpath,res);
+            readFiles(Folderpath,(err,response)=>{
+                if(response == null)
+                    res.json(null);
+                else{
+                    console.log("inside old function",response);
+                   res.json(response);
+                }
+           })
         }
     });
 });
@@ -228,7 +270,15 @@ var Storage = multer.diskStorage({
     var Folderpath=GlobalFolderpath+"/"+userIdGlobal;
     //console.log("Folder--->",GlobalFolderpath,"userid",userIdGlobal);
     //console.log("path",Folderpath);
-    readFiles(Folderpath,res);
+    //readFiles(Folderpath,res);
+    readFiles(Folderpath,(err,response)=>{
+        if(response == null)
+            res.json(null);
+        else{
+            console.log("inside old function",response);
+           res.json(response);
+        }
+   })
   });
 
   router.post('/selectedFolder', function(req, res) {

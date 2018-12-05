@@ -3,6 +3,11 @@
   background-color: #163f7f;
 }
 
+.rightClickContainer {
+  margin-left:-39px;
+  margin-top:-15px;
+}
+
 .appbarComponent mat-icon {
   float:right;
   margin-top: -40px;

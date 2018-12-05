@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDialogComponent } from './file-dialog/file-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {ContextmenuComponent} from './contextmenu/contextmenu.component';
 
 import { DashboardService } from './dashboard.service';
 
@@ -39,7 +40,8 @@ import { FileDropModule } from 'ngx-file-drop';
     DashboardComponent,
     FileDialogComponent,
     UploadDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ContextmenuComponent
   ],
   imports: [
     BrowserModule,
