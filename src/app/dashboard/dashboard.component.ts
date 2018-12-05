@@ -170,6 +170,7 @@ export class DashboardComponent implements OnInit {
 
         const formData: FormData = new FormData();
         formData.append('myfile', result,result.name);
+        formData.append('path',this.currentPath);
         var options = { content: formData };
 
           const req = new HttpRequest('POST', 'http://localhost:3000/file/uploadFile', formData,{
@@ -245,33 +246,57 @@ export class DashboardComponent implements OnInit {
   }
 
   selectedFolder(selectedFolder):void {
-      this.dashboardservice.fetchSelectedFolderContents(selectedFolder)
-                           .subscribe((response:any) => {
 
-                                if(typeof response != "string")
-                                  {
-                                    this.contentObj = response.fileData;
-                                    this.backButtonDisable = false;
-                                  }
-                                  else{
-                                    // this.currentPath = this.currentPath + '/' + response;
-                                    console.log('------>',this.currentPath);
-                                    this.contentObj = [];
-                                    //console.log("selected folder--->",selectedFolder[name]);
-                                    //this.router.navigate(['/dashboard/'+this.userId,this.selectedFolder]);
-                                    // this.empty = true;
-                                  }
-                           });
+      if(selectedFolder.type=="folder")
+      {
+        this.dashboardservice.fetchSelectedFolderContents(selectedFolder)
+                             .subscribe((response:any) => {
+
+                                  if(typeof response != "string")
+                                    {
+                                      this.contentObj = response.fileData;
+                                      this.backButtonDisable = false;
+                                      this.currentPath=response.fileData[0].file;
+                                    }
+                                    else{
+                                      // this.currentPath = this.currentPath + '/' + response;
+                                      console.log('------>',this.currentPath);
+                                      this.backButtonDisable = false;
+                                      this.contentObj = [];
+                                      //console.log("selected folder--->",selectedFolder[name]);
+                                      //this.router.navigate(['/dashboard/'+this.userId,this.selectedFolder]);
+                                      // this.empty = true;
+                                    }
+                             });
+      }
+
   }
 
   handleBackButton():void {
-    this.dashboardservice.fetchFolderOneLevelUpContents(this.currentPath)
+
+    this.userIdObj={
+      userId:this.currentPath
+    }
+    this.dashboardservice.fetchFolderOneLevelUpContents(this.userIdObj)
                          .subscribe((response:any) => {
-                              if(!response)
-                                {
                                   this.contentObj = response.fileData;
+                                  console.log("filedata",response.fileData);
+
+
+                                  var path=response.fileData[0].file;
+                                  var nameFile=path.split('/');
+                                  var namelength=nameFile.length;
+                                  console.log("name length",namelength);
+                                  var filename=nameFile[namelength-1];
+                                  console.log("file name",filename);
+                                    var pathLength=path.length;
+                                    var filelength=filename.length;
+                                    path=path.substr(0,(pathLength-filelength-1));
+
+
+                                  this.currentPath = path;
+                                  console.log('inside back handler',this.currentPath);
                                   this.backButtonDisable = false;
-                                }
                          });
   }
 
