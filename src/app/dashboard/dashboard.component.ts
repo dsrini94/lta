@@ -34,7 +34,8 @@ export interface FileUploadObj {
 }
 
   export interface userIdObj{
-    userId: string
+    userId: string,
+    path: string
   }
 
 @Component({
@@ -60,7 +61,7 @@ export class DashboardComponent implements OnInit {
   loadingMsg:string = "";
   backButtonDisable: boolean = true;
 
-  // [
+  // contentObj = [
   //   {
   //     userId:'srini',
   //     type:'image',
@@ -88,8 +89,12 @@ export class DashboardComponent implements OnInit {
 
   getFileData():void {
 
+    this.currentPath = "Users/"+this.userId;
+    console.log('insied getFileData',this.currentPath);
+
     this.userIdObj={
-     userId:this.userId
+     userId:this.userId,
+     path:this.currentPath
       }
     this.dashboardservice.getDirectories(this.userIdObj)
                          .subscribe((response:any) => {
@@ -99,24 +104,31 @@ export class DashboardComponent implements OnInit {
                              console.log(response);
                              this.empty=false;
                              this.contentObj = response.fileData;
-                             this.currentPath = response.fileData[0].file;
+                             this.currentPath = "Users/"+this.userId;
+                             console.log('insied getFileData',this.currentPath);
+                             // this.currentPath = response.fileData[0].file;
 
                            }
                            else
                            {
                              console.log('inside else',response);
                              this.empty = true;
+                             this.currentPath = "Users/"+this.userId;
+                             console.log('insied getFileData',this.currentPath);
                            }
 
                          });
   }
 
   getUserId(): void {
-    console.log();
      this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
+     console.log(this.userId);
   }
 
   openDialog(type): void {
+    this.getUserId();
+    this.currentPath="Users/"+this.userId;
+
     this.type = type;
     this.loadingMsg="";
     const dialogRef = this.dialog.open(FileDialogComponent, {
@@ -125,6 +137,7 @@ export class DashboardComponent implements OnInit {
         type:type
       }
     });
+
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
@@ -136,14 +149,23 @@ export class DashboardComponent implements OnInit {
           path:this.currentPath
         };
 
+        console.log(this.userObj);
+
+
         this.dashboardservice.createFile(this.userObj)
                              .subscribe((response:any) => {
                                if(response!=null)
                                {
-                                 this.empty = false;
-                                 this.currentPath = response.fileData[0].file;
-                                 console.log("inside create file",this.currentPath);
+                                 console.log(response.fileData);
+                                 // this.getFileData();
                                  this.contentObj = response.fileData;
+                                 this.contentObj = response.fileData;
+                                 this.contentObj = response.fileData;
+                                 // conso
+                                 this.empty = false;
+                                 // this.currentPath = response.fileData[0].file;
+                                 console.log("inside create file",this.currentPath);
+
                                }
                              });
       }
@@ -197,7 +219,10 @@ export class DashboardComponent implements OnInit {
               this.value=100;
               this.loadingMsg="File uploaded successfully ..."
               console.log('😺 Done!',this.value);
-              this.getFileData();
+              console.log("event--->",event.body.fileData);
+              this.contentObj=event.body.fileData;
+              //console.log("event data",event.fileData);
+              // this.getFileData();
           }
         });
       }
@@ -243,9 +268,13 @@ export class DashboardComponent implements OnInit {
   }
 
   selectedFolder(selectedFolder):void {
+    this.loadingMsg="";
+
 
       if(selectedFolder.type=="folder")
       {
+        this.currentPath = this.currentPath +'/'+selectedFolder.name;
+        console.log('----------->',selectedFolder);
         this.dashboardservice.fetchSelectedFolderContents(selectedFolder)
                              .subscribe((response:any) => {
 
@@ -253,11 +282,9 @@ export class DashboardComponent implements OnInit {
                                     {
                                       this.contentObj = response.fileData;
                                       this.backButtonDisable = false;
-                                      this.currentPath=response.fileData[0].file;
+
                                     }
                                     else{
-                                      // this.currentPath = this.currentPath + '/' + response;
-                                      console.log('------>',this.currentPath);
                                       this.backButtonDisable = false;
                                       this.contentObj = [];
                                       //console.log("selected folder--->",selectedFolder[name]);
@@ -272,21 +299,23 @@ export class DashboardComponent implements OnInit {
   handleBackButton():void {
 
     this.userIdObj={
-      userId:this.currentPath
+      userId:this.currentPath,
+      path:this.currentPath
     }
     this.dashboardservice.fetchFolderOneLevelUpContents(this.userIdObj)
                          .subscribe((response:any) => {
+                           console.log(response);
                            if(response.fileData[0].root=="no"){
                                   this.contentObj = response.fileData;
                                   console.log("filedata",response.fileData);
                                   var path=response.fileData[0].file;
-                                  var nameFile=path.split('/');
-                                  var namelength=nameFile.length;
-                                  var filename=nameFile[namelength-1];
-                                  var pathLength=path.length;
-                                  var filelength=filename.length;
-                                  path=path.substr(0,(pathLength-filelength-1));
-
+                                  // var nameFile=path.split('/');
+                                  // var namelength=nameFile.length;
+                                  // var filename=nameFile[namelength-1];
+                                  // var pathLength=path.length;
+                                  // var filelength=filename.length;
+                                  // path=path.substr(0,(pathLength-filelength-1));
+                                  console.log("path",path);
                                   this.currentPath = path;
                                   console.log('inside back handler',this.currentPath);
                                   this.backButtonDisable = false;

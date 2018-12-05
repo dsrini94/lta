@@ -6,6 +6,7 @@
 .rightClickContainer {
   margin-left:-39px;
   margin-top:-15px;
+  height:150vh;
 }
 
 .appbarComponent mat-icon {
