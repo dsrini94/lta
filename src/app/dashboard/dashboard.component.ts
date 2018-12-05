@@ -33,12 +33,9 @@ export interface FileUploadObj {
   path:string
 }
 
-
-
   export interface userIdObj{
     userId: string
   }
-
 
 @Component({
   selector: 'app-dashboard',
@@ -86,7 +83,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getUserId();
     this.getFileData();
-    
+
   }
 
   getFileData():void {
