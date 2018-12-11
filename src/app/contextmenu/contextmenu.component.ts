@@ -17,6 +17,14 @@ import { HttpClientModule, HttpClient, HttpRequest, HttpEvent ,HttpEventType, Ht
 })
 export class ContextmenuComponent {
 
+  getdata():string { 
+    return this.dashboardservice.path; 
+  } 
+
+  setdata(value: string) { 
+    this.dashboardservice.path = value; 
+  } 
+
 constructor(private http: HttpClient,private location: Location,
   private router: Router, private activatedRoute: ActivatedRoute,
   public dialog: MatDialog,private dashboardservice:DashboardService) { }
@@ -25,8 +33,8 @@ constructor(private http: HttpClient,private location: Location,
     this.router,this.activatedRoute,this.dialog,this.dashboardservice);
 
 
-
   handleRightClickFile(file):void {
+    console.log(this.dashboardComponent.getdata());
     this.dashboardComponent.openDialog(file);
   }
 

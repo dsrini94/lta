@@ -8,6 +8,8 @@ import { HttpClientModule, HttpClient, HttpRequest, HttpEvent ,HttpEventType, Ht
 
 export class DashboardService {
 
+  path:string;
+
   constructor(private http: HttpClient) { }
 
   getDirectories(userId){
